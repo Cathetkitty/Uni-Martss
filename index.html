@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width,
+        initial-scale=1.0,
+        maximum-scale=1.0,
+        user-scalable=no"
+    >
+
+    <title>UniMart</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="phone">
+
+    <!-- TOP STATUS BAR -->
+    <div class="status-bar">
+
+        <span class="time">9:41</span>
+
+        <div class="status-icons">
+            <span class="signal">•••</span>
+            <span class="wifi">⌁</span>
+            <span class="battery">▭</span>
+        </div>
+
+    </div>
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-peach"></div>
+    <div class="top-green"></div>
+
+    <!-- NOTCH -->
+    <div class="notch"></div>
+
+    <!-- HAMBURGER MENU -->
+    <button id="menuBtn" class="menu-btn" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- SIDE MENU -->
+    <div id="sideMenu" class="side-menu">
+
+        <div class="menu-header">
+            <h2>UniMart</h2>
+
+            <button id="closeMenu" class="close-menu">
+                ×
+            </button>
+        </div>
+
+        <div class="menu-content">
+
+            <button id="aboutDeveloper" class="menu-item">
+                <span class="menu-icon">👩‍💻</span>
+                <span>About Developer</span>
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- MENU OVERLAY -->
+    <div id="menuOverlay" class="menu-overlay"></div>
+
+    <!-- ABOUT DEVELOPER MODAL -->
+    <div id="developerModal" class="developer-modal">
+
+        <div class="developer-box">
+
+            <button id="closeDeveloper" class="developer-close">
+                ×
+            </button>
+
+            <!-- AVATAR -->
+            <div class="developer-avatar">
+                <div class="avatar-head"></div>
+                <div class="avatar-body"></div>
+            </div>
+
+            <!-- NAME -->
+            <h2>Catherine Villacarolos</h2>
+
+            <p class="developer-role">
+                UniMart Developer
+            </p>
+
+            <!-- COURSE & SCHOOL -->
+            <div class="developer-section">
+
+                <div class="info-row">
+                    <span class="info-icon">🎓</span>
+
+                    <div>
+                        <strong>Course</strong>
+                        <p>BS Information Technology</p>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-icon">🏫</span>
+
+                    <div>
+                        <strong>School</strong>
+                        <p>Madridejos Community College</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SKILLS -->
+            <div class="developer-section">
+
+                <h4>Skills</h4>
+
+                <div class="skills">
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JavaScript</span>
+                    <span>UI Design</span>
+                    <span>Web Development</span>
+                </div>
+
+            </div>
+
+            <!-- KNOWLEDGE -->
+            <div class="developer-section">
+
+                <h4>Knowledge</h4>
+
+                <p class="knowledge-text">
+                    Knowledge in web development, mobile
+                    application design, user interface design,
+                    database management, and basic system
+                    development.
+                </p>
+
+            </div>
+
+            <!-- DONE -->
+            <button id="doneDeveloper" class="done-btn">
+                Done
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="welcome">
+
+        <!-- STORE LOGO -->
+        <div class="store-logo">
+
+            <div class="roof">
+
+                <div class="roof-piece yellow"></div>
+                <div class="roof-piece orange"></div>
+                <div class="roof-piece yellow"></div>
+                <div class="roof-piece orange"></div>
+                <div class="roof-piece yellow"></div>
+
+            </div>
+
+            <div class="store-body">
+
+                <div class="cart-icon">
+                    <div class="cart-basket">
+                        🛒
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- BRAND -->
+        <div class="brand">
+            <span class="uni">Uni</span>
+            <span class="mart">Mart</span>
+        </div>
+
+        <!-- TAGLINE -->
+        <div class="tagline">
+            <div>Maliit na Tindahan,</div>
+            <div>Malaking Solusyon!</div>
+        </div>
+
+        <!-- BUTTONS -->
+        <div class="actions">
+
+            <button
+                id="getStarted"
+                class="get-started"
+                type="button"
+            >
+                Get Started
+            </button>
+
+            <button
+                id="loginBtn"
+                class="login-button"
+                type="button"
+            >
+                I already have an account
+            </button>
+
+        </div>
+
+    </main>
+
+    <!-- BOTTOM DESIGN -->
+    <div class="bottom-yellow"></div>
+    <div class="bottom-peach"></div>
+    <div class="bottom-green"></div>
+
+</div>
+
+<!-- MAIN JAVASCRIPT -->
+<script src="script.js"></script>
+
+<!-- =================================
+     UNIMART OFFLINE SUPPORT
+================================== -->
+<script>
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener("load", function () {
+
+        navigator.serviceWorker.register("./sw.js")
+
+            .then(function (registration) {
+                console.log(
+                    "UniMart Offline Support Enabled!",
+                    registration.scope
+                );
+            })
+
+            .catch(function (error) {
+                console.error(
+                    "Service Worker Registration Failed:",
+                    error
+                );
+            });
+
+    });
+
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>UniMart</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box
+}
+
+html,body{
+  width:100%;
+  height:100%
+}
+
+body{
+  background:#dfe7df;
+  font-family:"Poppins","Segoe UI",Arial,sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden
+}
+
+.phone{
+  position:relative;
+  width:100%;
+  height:100dvh;
+  max-width:390px;
+  background:#fff7e8;
+  overflow:hidden
+}
+
+@media(min-width:500px){
+  .phone{
+    height:min(100dvh,844px);
+    border-radius:28px;
+    box-shadow:0 10px 35px rgba(0,0,0,.15)
+  }
+}
+
+.auth-container{
+  width:100%;
+  height:100%;
+  padding:14px 22px 24px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  overflow-y:auto;
+  scrollbar-width:none
+}
+
+.auth-container::-webkit-scrollbar{
+  display:none
+}
+
+/* LOGO */
+.logo{
+  width:104px;
+  height:78px;
+  flex-shrink:0
+}
+
+.logo svg{
+  width:100%;
+  height:100%;
+  display:block
+}
+
+.brand{
+  margin-top:2px;
+  font-size:42px;
+  line-height:1.1;
+  font-weight:800;
+  letter-spacing:-1.5px;
+  white-space:nowrap
+}
+
+.uni{
+  color:#0d4f3b
+}
+
+.mart{
+  color:#f26b21
+}
+
+.auth-page{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center
+}
+
+.hidden{
+  display:none !important
+}
+
+/* TITLE */
+.title{
+  width:100%;
+  margin-top:20px
+}
+
+.title h1{
+  color:#111;
+  font-size:25px;
+  line-height:1.2;
+  font-weight:700
+}
+
+.title p{
+  color:#2f3d38;
+  font-size:15.5px;
+  line-height:1.35;
+  font-weight:500;
+  margin-top:2px
+}
+
+/* INPUTS */
+.input-box{
+  width:100%;
+  height:46px;
+  margin-top:14px;
+  display:flex;
+  align-items:center;
+  background:#fff;
+  border:1px solid #dcdfdb;
+  border-radius:10px;
+  box-shadow:0 2px 6px rgba(0,0,0,.05)
+}
+
+.title+.input-box{
+  margin-top:20px
+}
+
+.input-box:focus-within{
+  border-color:#0d6b4a;
+  box-shadow:0 0 0 3px rgba(13,107,74,.10)
+}
+
+.input-icon{
+  width:44px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#2c3a35;
+  flex-shrink:0
+}
+
+.input-icon svg,
+.eye-button svg{
+  width:21px;
+  height:21px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round
+}
+
+.input-box input{
+  width:100%;
+  height:100%;
+  border:none;
+  outline:none;
+  background:transparent;
+  color:#222;
+  font-family:inherit;
+  font-size:14.5px;
+  font-weight:500;
+  padding-right:6px
+}
+
+.input-box input::placeholder{
+  color:#6e7a75;
+  opacity:1
+}
+
+/* PHONE NUMBER */
+#registerPhone{
+  letter-spacing:.5px
+}
+
+.eye-button{
+  width:46px;
+  height:100%;
+  border:none;
+  background:transparent;
+  color:#2c3a35;
+  cursor:pointer;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-shrink:0
+}
+
+.eye-button.on{
+  color:#0d6b4a
+}
+
+/* MESSAGES */
+.error-message,
+.success-message{
+  width:100%;
+  margin-top:8px;
+  font-size:12px;
+  font-weight:600;
+  line-height:1.3;
+  display:none
+}
+
+.error-message{
+  color:#d64545
+}
+
+.success-message{
+  color:#087c57
+}
+
+.error-message.show,
+.success-message.show{
+  display:block
+}
+
+/* OPTIONS */
+.options{
+  width:100%;
+  margin-top:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center
+}
+
+.remember{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:#2f3d38;
+  font-size:13px;
+  font-weight:500;
+  cursor:pointer
+}
+
+.remember input{
+  appearance:none;
+  -webkit-appearance:none;
+  width:20px;
+  height:20px;
+  border-radius:4px;
+  background:#fff;
+  border:1.5px solid #9aa6a1;
+  display:grid;
+  place-content:center;
+  cursor:pointer;
+  margin:0
+}
+
+.remember input:checked{
+  background:#0d6b4a;
+  border-color:#0d6b4a
+}
+
+.remember input:checked::after{
+  content:"";
+  width:5px;
+  height:10px;
+  border:solid #fff;
+  border-width:0 2.2px 2.2px 0;
+  transform:rotate(45deg) translate(-1px,-1px)
+}
+
+.forgot{
+  border:none;
+  background:transparent;
+  color:#0d6b4a;
+  font-family:inherit;
+  font-size:12.5px;
+  font-weight:600;
+  text-decoration:underline;
+  cursor:pointer;
+  padding:0
+}
+
+/* BUTTONS */
+.main-button{
+  width:100%;
+  height:50px;
+  margin-top:20px;
+  border:none;
+  border-radius:10px;
+  background:#0d5a3d;
+  color:#fff;
+  font-family:inherit;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 4px 10px rgba(13,90,61,.22);
+  transition:background .2s,transform .15s
+}
+
+.main-button:hover{
+  background:#0a4a32
+}
+
+.main-button:active{
+  transform:scale(.98)
+}
+
+.bottom-text{
+  width:100%;
+  margin-top:16px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
+  color:#2f3d38;
+  font-size:13px;
+  font-weight:500
+}
+
+.bottom-text button{
+  border:none;
+  background:transparent;
+  color:#0d6b4a;
+  font-family:inherit;
+  font-size:13px;
+  font-weight:700;
+  text-decoration:underline;
+  cursor:pointer;
+  padding:0
+}
+
+button:focus-visible{
+  outline:3px solid #f26b21;
+  outline-offset:2px
+}
+
+/* REGISTER */
+#registerPage .title{
+  margin-top:12px
+}
+
+#registerPage .input-box{
+  margin-top:10px
+}
+
+#registerPage .title+.input-box{
+  margin-top:14px
+}
+
+#registerPage .main-button{
+  margin-top:16px
+}
+
+/* SMALL SCREEN */
+@media(max-height:700px){
+  .logo{
+    transform:scale(.9);
+    margin-bottom:-6px
+  }
+
+  .brand{
+    font-size:36px
+  }
+
+  .title{
+    margin-top:12px
+  }
+
+  .input-box{
+    height:42px;
+    margin-top:10px
+  }
+
+  .main-button{
+    height:44px;
+    margin-top:14px
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="phone">
+
+<main class="auth-container">
+
+<!-- LOGO -->
+<div class="logo">
+<svg viewBox="0 0 104 78" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+
+<defs>
+<clipPath id="roof">
+<path d="M14 8Q14 3 20 3H84Q90 3 90 8L98 32H6Z"/>
+</clipPath>
+</defs>
+
+<path
+d="M16 31V62Q16 74 28 74H76Q88 74 88 62V31Z"
+fill="#f26b21"
+stroke="#0d4f3b"
+stroke-width="4"
+stroke-linejoin="round"/>
+
+<g clip-path="url(#roof)">
+<rect x="0" y="0" width="22" height="34" fill="#f8b81f"/>
+<rect x="22" y="0" width="20" height="34" fill="#f26b21"/>
+<rect x="42" y="0" width="20" height="34" fill="#f8b81f"/>
+<rect x="62" y="0" width="20" height="34" fill="#f26b21"/>
+<rect x="82" y="0" width="22" height="34" fill="#f8b81f"/>
+</g>
+
+<path
+d="M14 8Q14 3 20 3H84Q90 3 90 8L98 32H6Z"
+fill="none"
+stroke="#0d4f3b"
+stroke-width="4"
+stroke-linejoin="round"/>
+
+<path
+d="M36 42h6l5 16h21l5-13H43"
+fill="none"
+stroke="#fff"
+stroke-width="3.6"
+stroke-linecap="round"
+stroke-linejoin="round"/>
+
+<circle cx="49" cy="64" r="3" fill="#fff"/>
+<circle cx="66" cy="64" r="3" fill="#fff"/>
+
+</svg>
+</div>
+
+<div class="brand">
+<span class="uni">Uni</span><span class="mart">Mart</span>
+</div>
+
+
+<!-- LOGIN -->
+<section id="loginPage" class="auth-page">
+
+<div class="title">
+<h1>Login</h1>
+<p>Welcome back! Please login to<br>your account.</p>
+</div>
+
+<div class="input-box">
+<span class="input-icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="5" width="18" height="14" rx="3"/>
+<path d="M4 8l8 5.5L20 8"/>
+</svg>
+</span>
+
+<input
+type="text"
+id="loginEmail"
+placeholder="Email or Phone Number"
+autocomplete="username">
+</div>
+
+<div class="input-box">
+<span class="input-icon">
+<svg viewBox="0 0 24 24">
+<rect x="5" y="11" width="14" height="9.5" rx="2.5"/>
+<path d="M8 11V8a4 4 0 0 1 8 0v3"/>
+</svg>
+</span>
+
+<input
+type="password"
+id="loginPassword"
+placeholder="Password"
+autocomplete="current-password">
+
+<button
+type="button"
+class="eye-button"
+id="loginEye"
+aria-label="Show or hide password">
+
+<svg viewBox="0 0 24 24">
+<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/>
+<circle cx="12" cy="12" r="3"/>
+</svg>
+
+</button>
+</div>
+
+<div id="loginError" class="error-message"></div>
+<div id="loginSuccess" class="success-message"></div>
+
+<div class="options">
+
+<label class="remember">
+<input type="checkbox" id="rememberMe" checked>
+<span>Remember me</span>
+</label>
+
+<button
+type="button"
+class="forgot"
+id="forgotPassword">
+Forgot password?
+</button>
+
+</div>
+
+<button
+type="button"
+class="main-button"
+id="loginButton">
+Login
+</button>
+
+<div class="bottom-text">
+<span>Don't have an account?</span>
+<button type="button" id="showRegister">Register</button>
+</div>
+
+</section>
+
+
+<!-- REGISTER -->
+<section id="registerPage" class="auth-page hidden">
+
+<div class="title">
+<h1>Create Account</h1>
+<p>Create your UniMart account<br>to get started.</p>
+</div>
+
+
+<!-- FULL NAME -->
+<div class="input-box">
+
+<span class="input-icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="4"/>
+<path d="M4 21c0-4 3.5-6 8-6s8 2 8 6"/>
+</svg>
+</span>
+
+<input
+type="text"
+id="registerName"
+placeholder="Full Name"
+autocomplete="name">
+
+</div>
+
+
+<!-- EMAIL -->
+<div class="input-box">
+
+<span class="input-icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="5" width="18" height="14" rx="3"/>
+<path d="M4 8l8 5.5L20 8"/>
+</svg>
+</span>
+
+<input
+type="email"
+id="registerEmail"
+placeholder="Email Address"
+autocomplete="email">
+
+</div>
+
+
+<!-- PHONE NUMBER -->
+<div class="input-box">
+
+<span class="input-icon">
+<svg viewBox="0 0 24 24">
+<rect x="7" y="2.5" width="10" height="19" rx="2.5"/>
+<path d="M11 18h2"/>
+</svg>
+</span>
+
+<input
+type="tel"
+id="registerPhone"
+placeholder="Phone Number (11 digits)"
+inputmode="numeric"
+autocomplete="tel"
+maxlength="11"
+pattern="[0-9]{11}">
+
+</div>
+
+
+<!-- PASSWORD -->
+<div class="input-box">
+
+<span class="input-icon">
+<svg viewBox="0 0 24 24">
+<rect x="5" y="11" width="14" height="9.5" rx="2.5"/>
+<path d="M8 11V8a4 4 0 0 1 8 0v3"/>
+</svg>
+</span>
+
+<input
+type="password"
+id="registerPassword"
+placeholder="Password"
+autocomplete="new-password">
+
+<button
+type="button"
+class="eye-button"
+id="registerEye"
+aria-label="Show or hide password">
+
+<svg viewBox="0 0 24 24">
+<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/>
+<circle cx="12" cy="12" r="3"/>
+</svg>
+
+</button>
+
+</div>
+
+
+<!-- CONFIRM PASSWORD -->
+<div class="input-box">
+
+<span class="input-icon">
+<svg viewBox="0 0 24 24">
+<rect x="5" y="11" width="14" height="9.5" rx="2.5"/>
+<path d="M8 11V8a4 4 0 0 1 8 0v3"/>
+</svg>
+</span>
+
+<input
+type="password"
+id="confirmPassword"
+placeholder="Confirm Password"
+autocomplete="new-password">
+
+</div>
+
+
+<div id="registerError" class="error-message"></div>
+<div id="registerSuccess" class="success-message"></div>
+
+<button
+type="button"
+class="main-button"
+id="registerButton">
+Create Account
+</button>
+
+<div class="bottom-text">
+<span>Already have an account?</span>
+<button type="button" id="showLogin">Login</button>
+</div>
+
+</section>
+
+</main>
+</div>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+const $ = id => document.getElementById(id);
+
+const loginPage = $("loginPage");
+const registerPage = $("registerPage");
+
+const loginEmail = $("loginEmail");
+const loginPassword = $("loginPassword");
+
+const loginError = $("loginError");
+const loginSuccess = $("loginSuccess");
+
+const registerError = $("registerError");
+const registerSuccess = $("registerSuccess");
+
+
+/* =========================
+   MESSAGES
+========================= */
+
+const showMsg = (el,msg)=>{
+  el.textContent = msg;
+  el.classList.add("show");
+};
+
+const clearMsg = el=>{
+  el.textContent = "";
+  el.classList.remove("show");
+};
+
+
+/* =========================
+   SWITCH LOGIN / REGISTER
+========================= */
+
+$("showRegister").onclick = ()=>{
+
+  clearMsg(loginError);
+  clearMsg(loginSuccess);
+
+  loginPage.classList.add("hidden");
+  registerPage.classList.remove("hidden");
+
+};
+
+$("showLogin").onclick = ()=>{
+
+  clearMsg(registerError);
+  clearMsg(registerSuccess);
+
+  registerPage.classList.add("hidden");
+  loginPage.classList.remove("hidden");
+
+};
+
+
+/* =========================
+   SHOW / HIDE PASSWORD
+========================= */
+
+function eye(btnId,inputId){
+
+  $(btnId).onclick = ()=>{
+
+    const input = $(inputId);
+
+    const show = input.type === "password";
+
+    input.type = show ? "text" : "password";
+
+    $(btnId).classList.toggle("on",show);
+
+  };
+
+}
+
+eye("loginEye","loginPassword");
+eye("registerEye","registerPassword");
+
+
+/* =========================
+   REMEMBERED EMAIL
+========================= */
+
+try{
+
+  const remembered =
+    localStorage.getItem("unimartRemember");
+
+  if(remembered){
+    loginEmail.value = remembered;
+  }
+
+}catch(e){}
+
+
+/* =========================
+   PHONE NUMBER
+   EXACTLY 11 DIGITS
+========================= */
+
+$("registerPhone").addEventListener("input",function(){
+
+  /* Remove everything except numbers */
+  this.value = this.value.replace(/\D/g,"");
+
+  /* Maximum 11 digits */
+  if(this.value.length > 11){
+    this.value = this.value.substring(0,11);
+  }
+
+  clearMsg(registerError);
+
+});
+
+
+/* =========================
+   LOGIN
+========================= */
+
+$("loginButton").onclick = ()=>{
+
+  clearMsg(loginError);
+  clearMsg(loginSuccess);
+
+  const email =
+    loginEmail.value.trim();
+
+  const password =
+    loginPassword.value.trim();
+
+
+  if(!email){
+
+    showMsg(
+      loginError,
+      "Please enter your email or phone number."
+    );
+
+    loginEmail.focus();
+    return;
+
+  }
+
+
+  if(!password){
+
+    showMsg(
+      loginError,
+      "Please enter your password."
+    );
+
+    loginPassword.focus();
+    return;
+
+  }
+
+
+  let saved = null;
+
+  try{
+
+    saved =
+      localStorage.getItem("unimartUser");
+
+  }catch(e){}
+
+
+  if(!saved){
+
+    showMsg(
+      loginError,
+      "No account found. Please register first."
+    );
+
+    return;
+
+  }
+
+
+  let user;
+
+  try{
+
+    user = JSON.parse(saved);
+
+  }catch(e){
+
+    showMsg(
+      loginError,
+      "Account data is invalid."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    email !== user.email &&
+    email !== user.phone
+  ){
+
+    showMsg(
+      loginError,
+      "Account not found."
+    );
+
+    return;
+
+  }
+
+
+  if(password !== user.password){
+
+    showMsg(
+      loginError,
+      "Incorrect password."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    if($("rememberMe").checked){
+
+      localStorage.setItem(
+        "unimartRemember",
+        email
+      );
+
+    }else{
+
+      localStorage.removeItem(
+        "unimartRemember"
+      );
+
+    }
+
+  }catch(e){}
+
+
+  /* Save logged-in state */
+  try{
+
+    localStorage.setItem(
+      "unimartLoggedIn",
+      "true"
+    );
+
+    localStorage.setItem(
+      "unimartCurrentUser",
+      JSON.stringify(user)
+    );
+
+  }catch(e){}
+
+
+  showMsg(
+    loginSuccess,
+    "Login successful."
+  );
+
+
+  setTimeout(()=>{
+
+    window.location.href =
+      "dashboard.html";
+
+  },500);
+
+};
+
+
+/* =========================
+   REGISTER
+========================= */
+
+$("registerButton").onclick = ()=>{
+
+  clearMsg(registerError);
+  clearMsg(registerSuccess);
+
+
+  const name =
+    $("registerName").value.trim();
+
+  const email =
+    $("registerEmail").value.trim();
+
+  const phone =
+    $("registerPhone").value.trim();
+
+  const password =
+    $("registerPassword").value.trim();
+
+  const confirm =
+    $("confirmPassword").value.trim();
+
+
+  const fail = (msg,field)=>{
+
+    showMsg(
+      registerError,
+      msg
+    );
+
+    $(field).focus();
+
+  };
+
+
+  /* NAME */
+  if(!name){
+
+    return fail(
+      "Please enter your full name.",
+      "registerName"
+    );
+
+  }
+
+
+  /* EMAIL */
+  if(!email){
+
+    return fail(
+      "Please enter your email address.",
+      "registerEmail"
+    );
+
+  }
+
+
+  /* PHONE REQUIRED */
+  if(!phone){
+
+    return fail(
+      "Please enter your phone number.",
+      "registerPhone"
+    );
+
+  }
+
+
+  /* PHONE NUMBERS ONLY */
+  if(!/^[0-9]+$/.test(phone)){
+
+    return fail(
+      "Phone number must contain numbers only.",
+      "registerPhone"
+    );
+
+  }
+
+
+  /* EXACTLY 11 DIGITS */
+  if(phone.length !== 11){
+
+    return fail(
+      "Phone number must be exactly 11 digits.",
+      "registerPhone"
+    );
+
+  }
+
+
+  /* OPTIONAL PHILIPPINE MOBILE VALIDATION */
+  if(!/^09\d{9}$/.test(phone)){
+
+    return fail(
+      "Please enter a valid 11-digit Philippine phone number starting with 09.",
+      "registerPhone"
+    );
+
+  }
+
+
+  /* PASSWORD */
+  if(!password){
+
+    return fail(
+      "Please create a password.",
+      "registerPassword"
+    );
+
+  }
+
+
+  if(password.length < 6){
+
+    return fail(
+      "Password must be at least 6 characters.",
+      "registerPassword"
+    );
+
+  }
+
+
+  /* CONFIRM PASSWORD */
+  if(!confirm){
+
+    return fail(
+      "Please confirm your password.",
+      "confirmPassword"
+    );
+
+  }
+
+
+  if(password !== confirm){
+
+    return fail(
+      "Passwords do not match.",
+      "confirmPassword"
+    );
+
+  }
+
+
+  /* SAVE ACCOUNT */
+  try{
+
+    const user = {
+
+      name:name,
+
+      email:email,
+
+      phone:phone,
+
+      password:password
+
+    };
+
+
+    localStorage.setItem(
+      "unimartUser",
+      JSON.stringify(user)
+    );
+
+
+    /* Also save current user data */
+    localStorage.setItem(
+      "unimartCurrentUser",
+      JSON.stringify(user)
+    );
+
+
+  }catch(e){
+
+    showMsg(
+      registerError,
+      "Could not save your account on this browser."
+    );
+
+    return;
+
+  }
+
+
+  showMsg(
+    registerSuccess,
+    "Account created successfully."
+  );
+
+
+  setTimeout(()=>{
+
+    registerPage.classList.add("hidden");
+
+    loginPage.classList.remove("hidden");
+
+    loginEmail.value = email;
+
+    loginPassword.value = "";
+
+    clearMsg(registerSuccess);
+
+  },700);
+
+};
+
+
+/* =========================
+   FORGOT PASSWORD
+========================= */
+
+$("forgotPassword").onclick = ()=>{
+
+  clearMsg(loginError);
+
+  showMsg(
+    loginError,
+    "Please contact the UniMart administrator to reset your password."
+  );
+
+};
+
+
+/* =========================
+   CLEAR LOGIN ERROR
+========================= */
+
+loginEmail.oninput = ()=>{
+  clearMsg(loginError);
+};
+
+loginPassword.oninput = ()=>{
+  clearMsg(loginError);
+};
+
+
+/* =========================
+   CLEAR REGISTER ERROR
+========================= */
+
+$("registerName").oninput = ()=>{
+  clearMsg(registerError);
+};
+
+$("registerEmail").oninput = ()=>{
+  clearMsg(registerError);
+};
+
+$("registerPassword").oninput = ()=>{
+  clearMsg(registerError);
+};
+
+$("confirmPassword").oninput = ()=>{
+  clearMsg(registerError);
+};
+
+});
+
+</script>
+
+</body>
+</html>

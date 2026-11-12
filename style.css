@@ -1,0 +1,1128 @@
+/* UniMart welcome page - style.css */
+
+:root{
+  --green:#0b5a3a;
+  --orange:#f28a32;
+  --yellow:#f7b731;
+  --cream:#fdf6ea;
+  --peach:#fbd9b5;
+  --mint:#dcebd0;
+  --ink:#1d3a2b;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+  width:100%;
+  min-height:100%;
+  background:#eceae4;
+  font-family:"Nunito","Poppins","Segoe UI",Arial,sans-serif;
+  color:var(--ink);
+}
+
+body{
+  display:flex;
+  justify-content:center;
+}
+
+button{
+  font-family:inherit;
+  cursor:pointer;
+  border:0;
+}
+
+/* PHONE FRAME */
+
+.phone{
+  position:relative;
+  width:100%;
+  max-width:480px;
+  min-height:100vh;
+  min-height:100dvh;
+  background:var(--cream);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+
+/* the design has no fake status bar or notch */
+.status-bar,
+.notch{
+  display:none;
+}
+
+/* BACKGROUND BLOBS */
+
+.top-green,
+.top-peach,
+.bottom-yellow,
+.bottom-peach,
+.bottom-green{
+  position:absolute;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:0;
+}
+
+.top-green{
+  width:230px;
+  height:230px;
+  top:-70px;
+  right:-80px;
+  background:var(--mint);
+}
+
+.top-peach{
+  width:150px;
+  height:150px;
+  top:40px;
+  right:-70px;
+  background:var(--peach);
+  opacity:.8;
+}
+
+.bottom-yellow{
+  width:240px;
+  height:240px;
+  left:-120px;
+  bottom:150px;
+  background:#fde2a6;
+}
+
+.bottom-peach{
+  width:200px;
+  height:200px;
+  left:-60px;
+  bottom:-90px;
+  background:var(--peach);
+}
+
+.bottom-green{
+  width:230px;
+  height:230px;
+  right:-100px;
+  bottom:-70px;
+  background:var(--mint);
+}
+
+/* CONTENT */
+
+.welcome{
+  position:relative;
+  z-index:1;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:64px 24px 40px;
+  text-align:center;
+}
+
+/* STORE LOGO */
+
+.store-logo{
+  width:150px;
+  margin-bottom:18px;
+}
+
+.roof{
+  display:flex;
+  height:42px;
+  border-radius:12px 12px 0 0;
+  overflow:hidden;
+}
+
+.roof-piece{
+  flex:1;
+  border-radius:0 0 14px 14px;
+}
+
+.roof-piece.yellow{
+  background:var(--yellow);
+}
+
+.roof-piece.orange{
+  background:var(--orange);
+}
+
+.store-body{
+  width:124px;
+  height:70px;
+  margin:-4px auto 0;
+  background:var(--green);
+  border-radius:0 0 12px 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.cart-icon{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* turn the emoji into a white cart icon */
+.cart-basket{
+  font-size:38px;
+  line-height:1;
+  filter:grayscale(1) brightness(10);
+}
+
+/* BRAND */
+
+.brand{
+  font-size:58px;
+  font-weight:900;
+  letter-spacing:-1.5px;
+  line-height:1;
+  margin-bottom:12px;
+}
+
+.uni{
+  color:var(--green);
+}
+
+.mart{
+  color:var(--orange);
+}
+
+/* TAGLINE */
+
+.tagline{
+  font-size:20px;
+  font-weight:700;
+  line-height:1.35;
+  color:var(--ink);
+}
+
+/* BUTTONS */
+
+.actions{
+  width:100%;
+  max-width:340px;
+  margin-top:auto;
+  padding-top:48px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+}
+
+.get-started{
+  width:100%;
+  height:52px;
+  border-radius:30px;
+  background:var(--green);
+  color:#fff;
+  font-size:16px;
+  font-weight:800;
+  box-shadow:0 6px 16px rgba(11,90,58,.28);
+  transition:transform .15s ease;
+}
+
+.get-started:active{
+  transform:scale(.97);
+}
+
+.login-button{
+  background:none;
+  color:var(--green);
+  font-size:14px;
+  font-weight:700;
+  padding:6px 10px;
+}
+
+.get-started:focus-visible,
+.login-button:focus-visible{
+  outline:3px solid var(--orange);
+  outline-offset:3px;
+}
+
+@media (max-height:640px){
+  .welcome{
+    padding-top:36px;
+  }
+  .brand{
+    font-size:48px;
+  }
+}
+/* =================================
+   HAMBURGER MENU BUTTON
+================================= */
+
+.menu-btn {
+    position: absolute;
+    top: 55px;
+    left: 20px;
+
+    width: 45px;
+    height: 45px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.9);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 5px;
+
+    cursor: pointer;
+
+    z-index: 1000;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.menu-btn span {
+    display: block;
+
+    width: 23px;
+    height: 3px;
+
+    border-radius: 5px;
+
+    background: #3d5b35;
+
+    transition: 0.3s;
+}
+
+
+/* =================================
+   SIDE MENU
+================================= */
+
+.side-menu {
+    position: fixed;
+
+    top: 0;
+    left: -290px;
+
+    width: 270px;
+    height: 100%;
+
+    background: #fffaf3;
+
+    z-index: 2000;
+
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.2);
+
+    transition: left 0.3s ease;
+
+    overflow-y: auto;
+}
+
+.side-menu.active {
+    left: 0;
+}
+
+
+/* =================================
+   MENU HEADER
+================================= */
+
+.menu-header {
+    height: 90px;
+
+    background: #55784d;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 20px;
+}
+
+.menu-header h2 {
+    margin: 0;
+
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.close-menu {
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 34px;
+
+    cursor: pointer;
+
+    line-height: 1;
+}
+
+
+/* =================================
+   MENU CONTENT
+================================= */
+
+.menu-content {
+    padding: 20px 15px;
+}
+
+.menu-item {
+    width: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    padding: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    border-radius: 12px;
+
+    color: #3d4f38;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    text-align: left;
+}
+
+.menu-item:hover {
+    background: #f3e4d5;
+}
+
+.menu-icon {
+    font-size: 23px;
+}
+
+
+/* =================================
+   OVERLAY
+================================= */
+
+.menu-overlay {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    z-index: 1500;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: 0.3s;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+
+    visibility: visible;
+}
+
+
+/* =================================
+   ABOUT DEVELOPER MODAL
+================================= */
+
+.developer-modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 3000;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: 0.3s;
+}
+
+.developer-modal.active {
+    opacity: 1;
+
+    visibility: visible;
+}
+
+
+/* =================================
+   DEVELOPER BOX
+================================= */
+
+.developer-box {
+    position: relative;
+
+    width: 100%;
+    max-width: 360px;
+
+    background: #fffaf3;
+
+    border-radius: 24px;
+
+    padding: 30px 25px;
+
+    text-align: center;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+
+    transform: translateY(20px);
+
+    transition: 0.3s;
+}
+
+.developer-modal.active .developer-box {
+    transform: translateY(0);
+}
+
+
+.developer-close {
+    position: absolute;
+
+    top: 12px;
+    right: 16px;
+
+    width: 35px;
+    height: 35px;
+
+    border: none;
+
+    background: #f3e4d5;
+
+    border-radius: 50%;
+
+    font-size: 25px;
+
+    color: #555;
+
+    cursor: pointer;
+}
+
+
+.developer-icon {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+
+    background: #e8f0df;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 36px;
+}
+
+
+.developer-box h2 {
+    margin: 5px 0;
+
+    color: #55784d;
+
+    font-size: 24px;
+}
+
+
+.developer-box h3 {
+    margin: 8px 0 15px;
+
+    color: #e78b45;
+
+    font-size: 20px;
+}
+
+
+.developer-box p {
+    color: #555;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+.developer-info {
+    margin-top: 15px;
+
+    padding: 15px;
+
+    background: #f7eee4;
+
+    border-radius: 15px;
+
+    text-align: left;
+}
+
+.developer-info p {
+    margin: 8px 0;
+
+    font-size: 14px;
+}
+
+
+.done-btn {
+    width: 100%;
+
+    margin-top: 18px;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #55784d;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.done-btn:active {
+    transform: scale(0.98);
+}
+/* =================================
+   HAMBURGER MENU
+================================= */
+
+.menu-btn {
+    position: absolute;
+
+    /* MAS MATAAS NA POSITION */
+    top: 38px;
+    left: 20px;
+
+    width: 45px;
+    height: 45px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.95);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 5px;
+
+    cursor: pointer;
+
+    z-index: 1000;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.menu-btn span {
+    display: block;
+
+    width: 23px;
+    height: 3px;
+
+    border-radius: 5px;
+
+    background: #3d5b35;
+}
+
+
+/* =================================
+   SIDE MENU
+================================= */
+
+.side-menu {
+    position: fixed;
+
+    top: 0;
+    left: -290px;
+
+    width: 270px;
+    height: 100%;
+
+    background: #fffaf3;
+
+    z-index: 2000;
+
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.2);
+
+    transition: left 0.3s ease;
+
+    overflow-y: auto;
+}
+
+.side-menu.active {
+    left: 0;
+}
+
+
+/* =================================
+   MENU HEADER
+================================= */
+
+.menu-header {
+    height: 90px;
+
+    background: #55784d;
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 20px;
+}
+
+.menu-header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.close-menu {
+    border: none;
+    background: transparent;
+
+    color: white;
+
+    font-size: 34px;
+
+    cursor: pointer;
+}
+
+
+/* =================================
+   MENU ITEM
+================================= */
+
+.menu-content {
+    padding: 20px 15px;
+}
+
+.menu-item {
+    width: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    padding: 15px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    border-radius: 12px;
+
+    color: #3d4f38;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    text-align: left;
+}
+
+.menu-item:hover {
+    background: #f3e4d5;
+}
+
+.menu-icon {
+    font-size: 23px;
+}
+
+
+/* =================================
+   OVERLAY
+================================= */
+
+.menu-overlay {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    z-index: 1500;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: 0.3s;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* =================================
+   DEVELOPER MODAL
+================================= */
+
+.developer-modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 3000;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: 0.3s;
+
+    overflow-y: auto;
+}
+
+.developer-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* =================================
+   DEVELOPER BOX
+================================= */
+
+.developer-box {
+    position: relative;
+
+    width: 100%;
+    max-width: 360px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: #fffaf3;
+
+    border-radius: 24px;
+
+    padding: 28px 22px;
+
+    text-align: center;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+
+    transform: translateY(20px);
+
+    transition: 0.3s;
+}
+
+.developer-modal.active .developer-box {
+    transform: translateY(0);
+}
+
+
+/* =================================
+   CLOSE BUTTON
+================================= */
+
+.developer-close {
+    position: absolute;
+
+    top: 12px;
+    right: 15px;
+
+    width: 35px;
+    height: 35px;
+
+    border: none;
+
+    background: #f3e4d5;
+
+    border-radius: 50%;
+
+    font-size: 25px;
+
+    color: #555;
+
+    cursor: pointer;
+}
+
+
+/* =================================
+   AVATAR
+================================= */
+
+.developer-avatar {
+    width: 90px;
+    height: 90px;
+
+    margin: 5px auto 12px;
+
+    border-radius: 50%;
+
+    background: #e8f0df;
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+
+/* HEAD */
+
+.avatar-head {
+    position: absolute;
+
+    top: 15px;
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    background: #f2c7a5;
+
+    z-index: 2;
+}
+
+
+/* HAIR */
+
+.avatar-head::before {
+    content: "";
+
+    position: absolute;
+
+    top: -4px;
+    left: -2px;
+
+    width: 42px;
+    height: 22px;
+
+    border-radius: 50% 50% 35% 35%;
+
+    background: #4a3025;
+}
+
+
+/* BODY */
+
+.avatar-body {
+    width: 65px;
+    height: 40px;
+
+    border-radius: 35px 35px 0 0;
+
+    background: #55784d;
+
+    margin-bottom: -5px;
+}
+
+
+/* =================================
+   DEVELOPER NAME
+================================= */
+
+.developer-box h2 {
+    margin: 5px 0 2px;
+
+    color: #55784d;
+
+    font-size: 22px;
+}
+
+.developer-role {
+    margin: 0 0 18px;
+
+    color: #e78b45;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+/* =================================
+   INFORMATION
+================================= */
+
+.developer-section {
+    margin-top: 15px;
+
+    padding: 14px;
+
+    background: #f7eee4;
+
+    border-radius: 15px;
+
+    text-align: left;
+}
+
+.info-row {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    margin-bottom: 12px;
+}
+
+.info-row:last-child {
+    margin-bottom: 0;
+}
+
+.info-icon {
+    font-size: 21px;
+}
+
+.info-row strong {
+    color: #55784d;
+
+    font-size: 14px;
+}
+
+.info-row p {
+    margin: 3px 0 0;
+
+    color: #555;
+
+    font-size: 13px;
+
+    line-height: 1.4;
+}
+
+
+/* =================================
+   SKILLS
+================================= */
+
+.developer-section h4 {
+    margin: 0 0 10px;
+
+    color: #55784d;
+
+    font-size: 15px;
+}
+
+.skills {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+}
+
+.skills span {
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    background: #e8f0df;
+
+    color: #55784d;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/* =================================
+   KNOWLEDGE
+================================= */
+
+.knowledge-text {
+    margin: 0;
+
+    color: #555;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =================================
+   DONE BUTTON
+================================= */
+
+.done-btn {
+    width: 100%;
+
+    margin-top: 18px;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #55784d;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.done-btn:active {
+    transform: scale(0.98);
+}

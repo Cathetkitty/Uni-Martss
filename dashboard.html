@@ -1,0 +1,5385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>UniMart</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent
+}
+
+:root{
+  --g:#006b4f;
+  --gl:#e8f6f0;
+  --o:#f28a32;
+  --bg:#f7f8f8;
+  --bd:#e8e8e8;
+  --mu:#777
+}
+
+html,body{
+  width:100%;
+  min-height:100%;
+  background:#f1f3f3;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#222
+}
+
+body{
+  display:flex;
+  justify-content:center
+}
+
+button,input,select{
+  font-family:inherit
+}
+
+button{
+  cursor:pointer
+}
+
+.app{
+  width:100%;
+  max-width:480px;
+  min-height:100vh;
+  background:var(--bg);
+  position:relative;
+  overflow-x:hidden;
+  padding-bottom:82px
+}
+
+/* HEADER */
+
+.header{
+  background:var(--g);
+  padding:16px;
+  color:#fff;
+  position:sticky;
+  top:0;
+  z-index:50
+}
+
+.row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px
+}
+
+.logo{
+  font-size:24px;
+  font-weight:900;
+  letter-spacing:-.5px
+}
+
+.logo span{
+  color:#ffb36d
+}
+
+.icon-btn{
+  width:40px;
+  height:40px;
+  border:0;
+  border-radius:12px;
+  background:rgba(255,255,255,.13);
+  color:#fff;
+  font-size:20px;
+  position:relative
+}
+
+.badge{
+  position:absolute;
+  top:-4px;
+  right:-4px;
+  min-width:19px;
+  height:19px;
+  padding:0 5px;
+  border-radius:20px;
+  background:var(--o);
+  color:#fff;
+  font-size:10px;
+  font-weight:700;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  border:2px solid var(--g)
+}
+
+.search{
+  margin-top:14px;
+  height:44px;
+  border-radius:14px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  padding:0 13px;
+  gap:9px;
+  color:#777
+}
+
+.search input{
+  width:100%;
+  border:0;
+  outline:0;
+  font-size:14px;
+  background:transparent;
+  color:#333
+}
+
+/* MAIN */
+
+.main{
+  padding:15px
+}
+
+.view{
+  display:none
+}
+
+.view.active{
+  display:block
+}
+
+/* HOME */
+
+.welcome h2{
+  font-size:22px
+}
+
+.welcome p{
+  margin:4px 0 16px;
+  color:var(--mu);
+  font-size:13px
+}
+
+.promo{
+  background:linear-gradient(135deg,#006b4f,#0b8a61);
+  border-radius:19px;
+  padding:19px;
+  color:#fff;
+  margin-bottom:22px
+}
+
+.promo small{
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:1px;
+  opacity:.85;
+  text-transform:uppercase
+}
+
+.promo h2{
+  font-size:25px;
+  line-height:1.05;
+  margin:7px 0
+}
+
+.promo p{
+  font-size:12px;
+  opacity:.9
+}
+
+.promo button{
+  margin-top:12px;
+  background:#fff;
+  color:var(--g);
+  border:0;
+  border-radius:9px;
+  padding:8px 13px;
+  font-weight:800;
+  font-size:12px
+}
+
+.sec{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:12px
+}
+
+.sec h3{
+  font-size:18px
+}
+
+.link{
+  border:0;
+  background:none;
+  color:var(--g);
+  font-size:12px;
+  font-weight:800
+}
+
+.sub{
+  color:#888;
+  font-size:12px;
+  margin:-6px 0 14px
+}
+
+/* CATEGORIES */
+
+.chips{
+  display:flex;
+  gap:11px;
+  overflow-x:auto;
+  padding-bottom:5px;
+  scrollbar-width:none;
+  margin-bottom:22px
+}
+
+.chips::-webkit-scrollbar{
+  display:none
+}
+
+.chip{
+  min-width:76px;
+  text-align:center;
+  border:0;
+  background:none
+}
+
+.chip i{
+  font-style:normal;
+  width:60px;
+  height:60px;
+  margin:auto;
+  background:#fff;
+  border-radius:18px;
+  border:1px solid var(--bd);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px
+}
+
+.chip span{
+  display:block;
+  margin-top:7px;
+  font-size:10px;
+  color:#555;
+  font-weight:700
+}
+
+.chip.on i{
+  background:var(--g);
+  border-color:var(--g);
+  color:#fff
+}
+
+.chip.on span{
+  color:var(--g)
+}
+
+/* PRODUCT GRID */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px
+}
+
+.card{
+  background:#fff;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid #ededed;
+  box-shadow:0 2px 8px rgba(0,0,0,.035);
+  cursor:pointer
+}
+
+.imgw{
+  height:160px;
+  padding:10px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+
+.imgw img,
+.thumb img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block
+}
+
+.ph{
+  width:100%;
+  height:100%;
+  background:#f3f4f4;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:8px;
+  font-size:11px;
+  font-weight:700;
+  color:#8a8f8d;
+  line-height:1.3
+}
+
+.tag{
+  position:absolute;
+  top:8px;
+  left:8px;
+  background:rgba(255,255,255,.94);
+  color:var(--g);
+  font-size:8px;
+  font-weight:800;
+  border-radius:7px;
+  padding:5px 7px;
+  border:1px solid var(--bd);
+  z-index:2
+}
+
+.info{
+  padding:11px
+}
+
+.pname{
+  font-size:13px;
+  font-weight:800;
+  line-height:1.25;
+  min-height:33px
+}
+
+.price{
+  color:var(--g);
+  font-size:17px;
+  font-weight:900;
+  margin-top:6px
+}
+
+.pbot{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:9px
+}
+
+.pbot small{
+  font-size:9px;
+  color:#888
+}
+
+.add{
+  width:32px;
+  height:32px;
+  border:0;
+  border-radius:10px;
+  background:var(--g);
+  color:#fff;
+  font-size:20px
+}
+
+.add:active{
+  transform:scale(.92)
+}
+
+.add:disabled{
+  background:#ccc;
+  cursor:not-allowed;
+  transform:none
+}
+
+/* CATEGORY CARDS */
+
+.cats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px
+}
+
+.cat{
+  background:#fff;
+  border:1px solid var(--bd);
+  border-radius:14px;
+  padding:8px;
+  text-align:left
+}
+
+.cat .imgw{
+  height:84px;
+  padding:0
+}
+
+.cat b{
+  display:block;
+  font-size:12px;
+  margin-top:7px
+}
+
+.cat small{
+  color:#4b806d;
+  font-size:10px;
+  font-weight:700
+}
+
+.cat:last-child{
+  grid-column:1/-1
+}
+
+/* FILTER TABS */
+
+.tabs{
+  display:flex;
+  gap:6px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  margin-bottom:12px
+}
+
+.tabs::-webkit-scrollbar{
+  display:none
+}
+
+.tab{
+  border:1px solid #ddd;
+  background:#fff;
+  color:#666;
+  border-radius:15px;
+  padding:7px 13px;
+  font-size:11px;
+  white-space:nowrap
+}
+
+.tab.on{
+  background:var(--g);
+  color:#fff;
+  border-color:var(--g)
+}
+
+.none{
+  grid-column:1/-1;
+  background:#fff;
+  border-radius:15px;
+  padding:35px 15px;
+  text-align:center;
+  color:#888;
+  font-size:13px
+}
+
+/* CART */
+
+.item{
+  background:#fff;
+  border-radius:15px;
+  padding:10px;
+  display:flex;
+  gap:10px;
+  border:1px solid var(--bd);
+  margin-bottom:10px
+}
+
+.thumb{
+  width:76px;
+  height:76px;
+  flex-shrink:0
+}
+
+.thumb .ph{
+  font-size:8px;
+  padding:4px
+}
+
+.item .in{
+  flex:1;
+  min-width:0
+}
+
+.item .n{
+  font-size:13px;
+  font-weight:800;
+  line-height:1.25
+}
+
+.item .p{
+  margin-top:4px;
+  color:var(--g);
+  font-weight:800;
+  font-size:14px
+}
+
+.qr{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:8px
+}
+
+.qc{
+  display:flex;
+  align-items:center;
+  gap:8px
+}
+
+.qb{
+  width:26px;
+  height:26px;
+  border:0;
+  border-radius:8px;
+  background:var(--gl);
+  color:var(--g);
+  font-weight:900
+}
+
+.qn{
+  font-size:12px;
+  font-weight:800;
+  min-width:14px;
+  text-align:center
+}
+
+.rm{
+  border:0;
+  background:none;
+  color:#d44;
+  font-size:11px
+}
+
+.sum{
+  background:#fff;
+  border-radius:16px;
+  padding:16px;
+  border:1px solid var(--bd);
+  margin-top:15px
+}
+
+.sr{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:9px;
+  font-size:13px
+}
+
+.st{
+  border-top:1px solid var(--bd);
+  padding-top:12px;
+  display:flex;
+  justify-content:space-between;
+  font-size:18px;
+  font-weight:900
+}
+
+.btn{
+  width:100%;
+  border:0;
+  background:var(--g);
+  color:#fff;
+  height:46px;
+  border-radius:12px;
+  margin-top:13px;
+  font-weight:800;
+  font-size:14px
+}
+
+.btn:disabled{
+  background:#ccc;
+  cursor:not-allowed
+}
+
+.empty{
+  background:#fff;
+  border-radius:18px;
+  padding:40px 20px;
+  text-align:center;
+  border:1px solid var(--bd)
+}
+
+.empty .e{
+  font-size:45px
+}
+
+.empty p{
+  color:#888;
+  font-size:12px;
+  margin-top:5px
+}
+
+/* PROFILE */
+
+.pc{
+  background:#fff;
+  border-radius:18px;
+  padding:20px;
+  border:1px solid var(--bd);
+  text-align:center
+}
+
+.av{
+  width:76px;
+  height:76px;
+  margin:auto;
+  border-radius:50%;
+  background:var(--gl);
+  color:var(--g);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  font-weight:900
+}
+
+.pc h2{
+  margin-top:11px;
+  font-size:20px
+}
+
+.pc p{
+  color:#888;
+  font-size:12px;
+  margin-top:4px
+}
+
+.menu{
+  margin-top:14px;
+  display:flex;
+  flex-direction:column;
+  gap:9px
+}
+
+.opt{
+  width:100%;
+  background:#fff;
+  border:1px solid var(--bd);
+  border-radius:13px;
+  padding:13px;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  text-align:left;
+  font-size:13px;
+  font-weight:700
+}
+
+.opt span:first-child{
+  width:30px;
+  height:30px;
+  border-radius:9px;
+  background:var(--gl);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0
+}
+
+.profile-value{
+  flex:1;
+  min-width:0
+}
+
+.profile-label{
+  display:block;
+  color:#888;
+  font-size:10px;
+  font-weight:500;
+  margin-bottom:3px
+}
+
+.profile-data{
+  display:block;
+  color:#222;
+  font-size:13px;
+  font-weight:800;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap
+}
+
+/* SETTINGS */
+
+.settings-heading{
+  margin-top:24px;
+  margin-bottom:12px
+}
+
+.settings-menu{
+  margin-top:0
+}
+
+.setting-btn{
+  position:relative;
+  padding-right:42px;
+  cursor:pointer
+}
+
+.setting-btn > div{
+  min-width:0;
+  flex:1
+}
+
+.setting-btn strong{
+  display:block;
+  color:#222;
+  font-size:13px;
+  font-weight:800
+}
+
+.setting-btn small{
+  display:block;
+  color:#888;
+  font-size:10px;
+  font-weight:500;
+  margin-top:3px
+}
+
+.setting-arrow{
+  position:absolute;
+  right:14px;
+  color:#999;
+  font-size:21px;
+  font-weight:400
+}
+
+.logout-btn{
+  color:#c62828
+}
+
+.logout-btn > span:first-child{
+  background:#fff0f0
+}
+
+.logout-btn strong{
+  color:#c62828
+}
+
+/* PURCHASE HISTORY */
+
+.history-section{
+  margin-top:24px
+}
+
+.history-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px
+}
+
+.history-card{
+  background:#fff;
+  border:1px solid var(--bd);
+  border-radius:15px;
+  padding:14px
+}
+
+.history-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px
+}
+
+.history-no{
+  font-size:13px;
+  font-weight:900;
+  color:var(--g)
+}
+
+.history-date{
+  font-size:10px;
+  color:#888;
+  margin-top:4px
+}
+
+.history-total{
+  font-size:15px;
+  font-weight:900;
+  color:var(--g);
+  white-space:nowrap
+}
+
+.history-items{
+  margin-top:10px;
+  padding-top:9px;
+  border-top:1px solid var(--bd);
+  font-size:11px;
+  color:#666;
+  line-height:1.55
+}
+
+.history-actions{
+  display:flex;
+  gap:8px;
+  margin-top:10px
+}
+
+.history-actions button{
+  flex:1;
+  height:36px;
+  border-radius:9px;
+  font-size:11px;
+  font-weight:800
+}
+
+.view-receipt{
+  border:1px solid var(--g);
+  color:var(--g);
+  background:#fff
+}
+
+.print-receipt{
+  border:0;
+  color:#fff;
+  background:var(--g)
+}
+
+.no-history{
+  background:#fff;
+  border:1px solid var(--bd);
+  border-radius:15px;
+  padding:25px 15px;
+  text-align:center;
+  color:#888;
+  font-size:12px
+}
+
+/* INFO */
+
+#infoContent{
+  color:#555;
+  font-size:13px;
+  line-height:1.65
+}
+
+.info-icon{
+  width:72px;
+  height:72px;
+  margin:4px auto 12px;
+  border-radius:20px;
+  background:var(--gl);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:38px
+}
+
+.info-center{
+  text-align:center
+}
+
+.info-title{
+  color:var(--g);
+  font-size:18px;
+  margin-bottom:9px
+}
+
+.info-content-p{
+  margin-bottom:10px
+}
+
+.info-version{
+  color:#999;
+  font-size:11px;
+  margin-top:14px
+}
+
+.info-bg{
+  align-items:center !important;
+  justify-content:center !important;
+  padding:20px
+}
+
+.info-modal{
+  width:100%;
+  max-width:390px;
+  max-height:80vh;
+  border-radius:20px !important;
+  padding:20px;
+  box-shadow:0 15px 45px rgba(0,0,0,.25);
+  animation:infoPop .18s ease-out
+}
+
+@keyframes infoPop{
+  from{transform:scale(.92);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+/* LOGOUT */
+
+#logoutBg{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  z-index:500;
+  align-items:center;
+  justify-content:center;
+  padding:20px
+}
+
+#logoutBg.show{
+  display:flex
+}
+
+.logout-modal{
+  width:100%;
+  max-width:360px;
+  background:#fff;
+  border-radius:20px;
+  padding:24px 20px 20px;
+  box-shadow:0 15px 45px rgba(0,0,0,.25);
+  text-align:center
+}
+
+.logout-icon{
+  width:58px;
+  height:58px;
+  margin:0 auto 13px;
+  border-radius:50%;
+  background:#fff0f0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:27px
+}
+
+.logout-modal h3{
+  font-size:18px;
+  color:#222;
+  margin-bottom:7px
+}
+
+.logout-modal p{
+  color:#777;
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:20px
+}
+
+.logout-actions{
+  display:flex;
+  gap:10px
+}
+
+.logout-actions button{
+  flex:1;
+  height:44px;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:700
+}
+
+#cancelLogout{
+  border:1px solid #ddd;
+  background:#f7f7f7;
+  color:#555
+}
+
+#confirmLogout{
+  border:0;
+  background:#c62828;
+  color:#fff
+}
+
+/* CHECKOUT */
+
+.checkout-modal{
+  max-height:90vh
+}
+
+.checkout-summary{
+  background:#f7f9f8;
+  border:1px solid var(--bd);
+  border-radius:14px;
+  padding:12px;
+  margin-bottom:14px
+}
+
+.checkout-row{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-size:12px;
+  margin-bottom:7px
+}
+
+.checkout-row:last-child{
+  margin-bottom:0
+}
+
+.checkout-row.total{
+  border-top:1px solid #ddd;
+  padding-top:10px;
+  margin-top:10px;
+  font-size:17px;
+  font-weight:900;
+  color:var(--g)
+}
+
+.checkout-products{
+  max-height:180px;
+  overflow-y:auto;
+  margin-bottom:15px
+}
+
+.checkout-product{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:8px 0;
+  border-bottom:1px solid #eee;
+  font-size:11px
+}
+
+.checkout-product:last-child{
+  border-bottom:0
+}
+
+.checkout-product-name{
+  flex:1
+}
+
+.checkout-product-price{
+  font-weight:800
+  white-space nowrap
+}
+
+.form-label{
+  display:block;
+  font-size:11px;
+  color:#666;
+  font-weight:700;
+  margin:11px 0 6px
+}
+
+.form-control{
+  width:100%;
+  height:44px;
+  border:1px solid #ddd;
+  border-radius:11px;
+  padding:0 12px;
+  outline:none;
+  background:#fff;
+  font-size:13px
+}
+
+.form-control:focus{
+  border-color:var(--g)
+}
+
+.payment-note{
+  background:#fff8ed;
+  border:1px solid #f3d8ad;
+  border-radius:10px;
+  padding:9px;
+  color:#8a5b18;
+  font-size:10px;
+  line-height:1.4;
+  margin-top:8px
+}
+
+/* RECEIPT */
+
+.receipt-modal{
+  max-height:90vh
+}
+
+.receipt{
+  background:#fff;
+  border:1px dashed #bbb;
+  border-radius:5px;
+  padding:18px 14px;
+  font-family:Arial,Helvetica,sans-serif
+}
+
+.receipt-header{
+  text-align:center;
+  border-bottom:1px dashed #aaa;
+  padding-bottom:12px;
+  margin-bottom:12px
+}
+
+.receipt-header h2{
+  color:var(--g);
+  font-size:22px
+}
+
+.receipt-header p{
+  font-size:10px;
+  color:#777;
+  margin-top:3px
+}
+
+.receipt-meta{
+  font-size:10px;
+  color:#555;
+  line-height:1.6;
+  margin-bottom:12px
+}
+
+.receipt-line{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-size:11px;
+  padding:5px 0;
+  border-bottom:1px dotted #ddd
+}
+
+.receipt-line span:first-child{
+  flex:1
+}
+
+.receipt-line span:last-child{
+  font-weight:700;
+  white-space:nowrap
+}
+
+.receipt-totals{
+  margin-top:10px;
+  border-top:1px dashed #aaa;
+  padding-top:10px
+}
+
+.receipt-total-row{
+  display:flex;
+  justify-content:space-between;
+  font-size:11px;
+  margin-bottom:6px
+}
+
+.receipt-total-row.grand{
+  font-size:16px;
+  font-weight:900;
+  color:var(--g);
+  padding-top:5px
+}
+
+.receipt-footer{
+  text-align:center;
+  border-top:1px dashed #aaa;
+  margin-top:12px;
+  padding-top:12px;
+  font-size:10px;
+  color:#777;
+  line-height:1.5
+}
+
+.receipt-actions{
+  display:flex;
+  gap:8px;
+  margin-top:13px
+}
+
+.receipt-actions button{
+  flex:1;
+  height:43px;
+  border-radius:11px;
+  font-size:12px;
+  font-weight:800
+}
+
+.receipt-close{
+  background:#f3f3f3;
+  color:#555;
+  border:1px solid #ddd
+}
+
+.receipt-print{
+  background:var(--g);
+  color:#fff;
+  border:0
+}
+
+/* NAV */
+
+.nav{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:480px;
+  height:72px;
+  background:#fff;
+  border-top:1px solid #e7e7e7;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  z-index:100;
+  padding-bottom:env(safe-area-inset-bottom)
+}
+
+.nav button{
+  border:0;
+  background:#fff;
+  color:#888;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  font-size:10px;
+  font-weight:700
+}
+
+.nav b{
+  font-size:21px;
+  line-height:1;
+  font-weight:400
+}
+
+.nav .on{
+  color:var(--g)
+}
+
+/* MODAL */
+
+.mbg{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:200;
+  align-items:flex-end;
+  justify-content:center
+}
+
+.mbg.show{
+  display:flex
+}
+
+.modal{
+  width:100%;
+  max-width:480px;
+  background:#fff;
+  border-radius:22px 22px 0 0;
+  padding:20px;
+  max-height:88vh;
+  overflow-y:auto
+}
+
+.mh{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+  gap:10px
+}
+
+.mh h3{
+  font-size:17px
+}
+
+.x{
+  border:0;
+  background:#f2f2f2;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  font-size:18px;
+  flex-shrink:0
+}
+
+.mimg{
+  height:230px
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:88px;
+  transform:translate(-50%,20px);
+  background:#222;
+  color:#fff;
+  padding:11px 16px;
+  border-radius:10px;
+  font-size:12px;
+  z-index:800;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  max-width:90%;
+  text-align:center
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0)
+}
+
+/* RESPONSIVE */
+
+@media(min-width:600px){
+
+  .app{
+    box-shadow:0 0 30px rgba(0,0,0,.12)
+  }
+
+  .grid{
+    grid-template-columns:repeat(3,1fr)
+  }
+
+}
+
+@media(max-width:350px){
+
+  .imgw{
+    height:140px
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+
+  <div class="row">
+
+    <div class="logo">
+      Uni<span>Mart</span>
+    </div>
+
+    <button class="icon-btn" data-view="cart" aria-label="Cart">
+      🛒
+      <span id="badge" class="badge">0</span>
+    </button>
+
+  </div>
+
+  <div class="search">
+    <span>⌕</span>
+    <input id="q" type="search" placeholder="Search products...">
+  </div>
+
+</header>
+
+
+<main class="main">
+
+<!-- HOME -->
+
+<section id="home" class="view active">
+
+  <div class="welcome">
+    <h2 id="hello">Hello, Shopper!</h2>
+    <p>What are you looking for today?</p>
+  </div>
+
+  <div class="promo">
+
+    <small>UniMart Special</small>
+
+    <h2>
+      Daily Deals<br>
+      &amp; Fresh Finds
+    </h2>
+
+    <p>
+      Shop your everyday essentials at affordable prices.
+    </p>
+
+    <button data-cat="Load & Promo">
+      Load Promos
+    </button>
+
+  </div>
+
+  <div class="sec">
+
+    <h3>Categories</h3>
+
+    <button class="link" data-view="categories">
+      See All
+    </button>
+
+  </div>
+
+  <div class="chips" id="chips"></div>
+
+  <div class="sec">
+
+    <h3>Featured Products</h3>
+
+    <button class="link" data-cat="All">
+      View All
+    </button>
+
+  </div>
+
+  <div id="featured" class="grid"></div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+
+<section id="categories" class="view">
+
+  <div class="sec">
+    <h3>Shop by Category</h3>
+  </div>
+
+  <p class="sub">
+    Choose a category to browse products.
+  </p>
+
+  <div class="cats" id="catGrid"></div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section id="products" class="view">
+
+  <div class="sec">
+
+    <div>
+      <h3 id="ptitle">All Products</h3>
+    </div>
+
+    <button class="link" id="backCategories">
+      ← Back to Categories
+    </button>
+
+  </div>
+
+  <p class="sub" id="psub"></p>
+
+  <div class="tabs" id="tabs" style="display:none"></div>
+
+  <div id="plist" class="grid"></div>
+
+</section>
+
+
+<!-- CART -->
+
+<section id="cart" class="view">
+
+  <div class="sec">
+
+    <h3>My Cart</h3>
+
+    <button class="link" id="clear">
+      Clear
+    </button>
+
+  </div>
+
+  <div id="cartBox"></div>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section id="profile" class="view">
+
+  <div class="sec">
+    <h3>My Profile</h3>
+  </div>
+
+  <div class="pc">
+
+    <div class="av" id="av">
+      U
+    </div>
+
+    <h2 id="pn">
+      UniMart User
+    </h2>
+
+    <p id="pe">
+      Welcome to UniMart
+    </p>
+
+  </div>
+
+  <div class="menu">
+
+    <div class="opt">
+      <span>👤</span>
+      <div class="profile-value">
+        <small class="profile-label">Full Name</small>
+        <strong class="profile-data" id="profileName">
+          Not available
+        </strong>
+      </div>
+    </div>
+
+    <div class="opt">
+      <span>📧</span>
+      <div class="profile-value">
+        <small class="profile-label">Email</small>
+        <strong class="profile-data" id="profileEmail">
+          Not available
+        </strong>
+      </div>
+    </div>
+
+    <div class="opt">
+      <span>📱</span>
+      <div class="profile-value">
+        <small class="profile-label">Phone Number</small>
+        <strong class="profile-data" id="profilePhone">
+          Not available
+        </strong>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- PURCHASE HISTORY -->
+
+  <div class="sec history-section">
+
+    <h3>Purchase History</h3>
+
+    <span
+      id="historyCount"
+      style="
+        font-size:11px;
+        color:#888;
+      "
+    >
+      0 receipt(s)
+    </span>
+
+  </div>
+
+  <div
+    id="historyList"
+    class="history-list"
+  ></div>
+
+
+  <!-- SETTINGS -->
+
+  <div class="sec settings-heading">
+    <h3>Settings</h3>
+  </div>
+
+  <div class="menu settings-menu">
+
+    <button
+      class="opt setting-btn"
+      data-info="app"
+      type="button"
+    >
+
+      <span>ℹ️</span>
+
+      <div>
+        <strong>About App</strong>
+        <small>Learn more about UniMart</small>
+      </div>
+
+      <b class="setting-arrow">›</b>
+
+    </button>
+
+
+    <button
+      class="opt setting-btn"
+      data-info="store"
+      type="button"
+    >
+
+      <span>🏪</span>
+
+      <div>
+        <strong>About This Store</strong>
+        <small>Information about UniMart Store</small>
+      </div>
+
+      <b class="setting-arrow">›</b>
+
+    </button>
+
+
+    <button
+      class="opt setting-btn logout-btn"
+      id="logout"
+      type="button"
+    >
+
+      <span>↩</span>
+
+      <div>
+        <strong>Log Out</strong>
+        <small>Sign out of your account</small>
+      </div>
+
+      <b class="setting-arrow">›</b>
+
+    </button>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- BOTTOM NAVIGATION -->
+
+<nav class="nav">
+
+  <button data-view="home" class="on">
+    <b>⌂</b>
+    Home
+  </button>
+
+  <button data-view="categories">
+    <b>▦</b>
+    Categories
+  </button>
+
+  <button data-view="cart">
+    <b>🛒</b>
+    Cart
+  </button>
+
+  <button data-view="profile">
+    <b>♙</b>
+    Profile
+  </button>
+
+</nav>
+
+
+<!-- PRODUCT MODAL -->
+
+<div id="mbg" class="mbg">
+
+  <div class="modal">
+
+    <div class="mh">
+
+      <h3 id="mt">
+        Product
+      </h3>
+
+      <button class="x" id="mx">
+        ×
+      </button>
+
+    </div>
+
+    <div id="mc"></div>
+
+  </div>
+
+</div>
+
+
+<!-- CHECKOUT MODAL -->
+
+<div id="checkoutBg" class="mbg">
+
+  <div class="modal checkout-modal">
+
+    <div class="mh">
+
+      <h3>Checkout</h3>
+
+      <button
+        class="x"
+        id="checkoutX"
+        type="button"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div id="checkoutContent"></div>
+
+  </div>
+
+</div>
+
+
+<!-- RECEIPT MODAL -->
+
+<div id="receiptBg" class="mbg">
+
+  <div class="modal receipt-modal">
+
+    <div class="mh">
+
+      <h3>Payment Receipt</h3>
+
+      <button
+        class="x"
+        id="receiptX"
+        type="button"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div id="receiptContent"></div>
+
+  </div>
+
+</div>
+
+
+<!-- ABOUT / STORE -->
+
+<div id="infoBg" class="mbg info-bg">
+
+  <div class="modal info-modal">
+
+    <div class="mh">
+
+      <h3 id="infoTitle">
+        About
+      </h3>
+
+      <button
+        class="x"
+        id="infoX"
+        type="button"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div id="infoContent"></div>
+
+  </div>
+
+</div>
+
+
+<!-- LOGOUT -->
+
+<div
+  id="logoutBg"
+  aria-hidden="true"
+>
+
+  <div
+    class="logout-modal"
+    role="dialog"
+    aria-modal="true"
+  >
+
+    <div class="logout-icon">
+      ↩
+    </div>
+
+    <h3>
+      Log Out
+    </h3>
+
+    <p>
+      Are you sure you want to log out?
+    </p>
+
+    <div class="logout-actions">
+
+      <button
+        id="cancelLogout"
+        type="button"
+      >
+        Cancel
+      </button>
+
+      <button
+        id="confirmLogout"
+        type="button"
+      >
+        Log Out
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div id="toast" class="toast"></div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   CATALOG
+========================================================= */
+
+const SM =
+"https://shopmetro.ph/mandaluyong-supermarket/wp-content/uploads/2023/10/";
+
+const IL =
+"https://store.iloilosupermart.com/wp-content/uploads/2020/05/";
+
+const LD =
+"https://assets.landers.ph/catalog/product/";
+
+const AZ =
+"https://m.media-amazon.com/images/I/";
+
+
+/* =========================================================
+   YOUR OWN PRODUCT PHOTOS
+========================================================= */
+
+const MY_IMAGES = {
+
+};
+
+
+/* =========================================================
+   PRODUCTS
+========================================================= */
+
+
+
+
+const D = {
+
+"Snacks":[
+
+["Piattos Sour Cream & Onion 85g",35,"Chips",
+"image/piatos.png","chips"],
+
+["Nova Country Cheddar 78g",35,"Chips",
+"image/Nova.jpg","chips"],
+
+["Chippy BBQ 110g",30,"Chips",
+"image/Chippy BBQ.jpg","chips"],
+
+["Boy Bawang Cornick Garlic 100g",25,"Cornick",
+"image/BoyBawang.jpg","chips"],
+
+["Fita Crackers 250g",55,"Biscuit",
+"image/FITA.png","biscuits"],
+
+["Hansel Original Crackers 250g",55,"Biscuit",
+"image/HANSEL.png","biscuits"],
+
+["Chiz Curls Cheese 100g",35,"Cheese Snack",
+"image/Curls.png","chips"],
+
+["Cream-O Vanilla 133g",45,"Cookies",
+"image/cream.png","cookies"],
+
+["Magic Flakes Crackers 200g",35,"Biscuit",
+"image/magic.png","biscuits"]
+
+],
+
+"Drinks":[
+
+["Coca-Cola 1.5L",75,"Soft Drink",
+"image/Pepsi.jpg"],
+
+["Coca-Cola 355ml",25,"Soft Drink",
+"image/Pepsi.jpg"],
+
+["Royal 355ml",25,"Soft Drink",
+"image/Sprite.jpg"],
+
+["Sprite 1.5L",75,"Soft Drink",
+"image/Sprite.jpg"],
+
+["Mountain Dew 1.5L",75,"Soft Drink",
+"image/Mountain Dew.jpg"],
+
+["Pepsi 1.5L",70,"Soft Drink",
+"image/Pepsi.jpg"],
+
+
+["Nestea Iced Tea",20,"Iced Tea",
+"image/Nestea.jpg"],
+
+["Milo Chocolate Drink",35,"Milk Drink",
+"image/Milo.jpg"],
+
+["Kopiko Coffee",12,"Coffee",
+"image/Kopiko.jpg"],
+
+
+],
+
+
+"Personal Care":[
+
+["Modes With Wings",25,"Feminine Care",
+"image/Modess.jpg"],
+
+["Palmolive Shampoo Sachet",12,"Shampoo",
+"image/Palmolive.jpg"],
+
+["Head & Shoulders Shampoo",18,"Shampoo",
+"image/headshoulders.jpg"],
+
+["Pantene Shampoo",18,"Shampoo",
+"image/pantene.jpg"],
+
+["Colgate Toothpaste",35,"Toothpaste",
+"image/colgate.jpg"],
+
+["Closeup Toothpaste",35,"Toothpaste",
+"image/closeup.png"],
+
+["Pepsodent Toothpaste",30,"Toothpaste",
+"image/pepsodent.jpg"],
+
+["Nivea Body Lotion",85,"Body Care",
+"image/nivea.png"],
+
+["Petroleum Jelly",70,"Body Care",
+"image/petroleum.jpg"],
+
+["Rexona Deodorant",75,"Deodorant",
+"image/rexona.jpg"]
+
+],
+
+
+
+
+"Household":[
+
+["Tide Detergent Powder",15,"Laundry",
+"image/Tide.jpg"],
+
+["Ariel Detergent Powder",15,"Laundry",
+"image/Ariel.JPG"],
+
+["Surf Detergent Powder",12,"Laundry",
+"image/surf.png"],
+
+["Downy Fabric Conditioner",15,"Laundry",
+"image/Downy.jpg"],
+
+["Joy Dishwashing Liquid",15,"Cleaning",
+"image/Joy.jpg"],
+
+["Axion Dishwashing Paste",20,"Cleaning",
+"image/Axion Dishwashing.jpg"],
+
+["Mr. Clean Floor Cleaner",45,"Cleaning",
+"image/Mr Muscle.jpg"]
+
+],
+
+
+
+
+"Instant Food":[
+
+
+["Argentina Corned Beef 150g",45,"Canned Food",
+"image/Argentina Corned Beef.jpg"],
+
+["Mega Sardines in Tomato Sauce 155g",30,"Canned Food",
+"image/mega-sardines.png"],
+
+["Ligo Sardines in Tomato Sauce 155g",30,"Canned Food",
+"image/ligo.png"],
+
+["Del Monte Tomato Sauce 250g",45,"Cooking",
+"image/delmonte.png"],
+
+["Hunt's Pork & Beans 390g",55,"Canned Food",
+"image/hunts.jpg"],
+
+],
+
+
+"Others":[
+
+["Jasmine Rice Premium 25kg",1550,"Rice",
+"image/jasmin.png","rice"],
+
+["Ganador",1450,"Rice",
+"image/ganador.png","rice"],
+
+["Dinorado Rice 25kg",1600,"Rice",
+"image/denorado.png","rice"],
+
+["Brown Rice 25kg",1550,"Rice",
+"image/brown.png","rice"],
+
+["Gardenia Classic White Bread 600g",78,"Bread",
+"image/hgardenia.png"],
+
+["Gardenia Chocolate Chip Loaf 400g",95,"Bread",
+"image/choco.png"],
+
+["Pinoy Tasty Bread 450g",89,"Bread",
+"image/pinoy.png"],
+
+["Gardenia Butter Toast 125g",51,"Bread",
+"image/toast.png"]
+
+]
+};
+
+/* =========================================================
+   CATEGORY SETTINGS
+========================================================= */
+
+const CATS = Object.keys(D);
+
+const ICON = {
+
+  "Snacks":"🍪",
+  "Drinks":"🥤",
+  "Personal Care":"🧴",
+  "Household":"🧹",
+  "Instant Food":"🍜",
+  "Load & Promo":"📱",
+  "Others":"⋯"
+
+};
+
+
+/* =========================================================
+   BUILD PRODUCTS
+========================================================= */
+
+const products = [];
+
+(function(){
+
+  CATS.forEach(c => {
+
+    D[c].forEach(r => {
+
+      let img =
+        Object.prototype.hasOwnProperty.call(
+          MY_IMAGES,
+          r[0]
+        )
+        ? MY_IMAGES[r[0]]
+        : (r[3] || "");
+
+      products.push({
+
+        id:products.length,
+        name:r[0],
+        price:Number(r[1]),
+        type:r[2],
+        image:img,
+        cat:c,
+        sub:r[4] || "",
+        stock:20
+
+      });
+
+    });
+
+  });
+
+})();
+
+
+const byId = id =>
+  products.find(p => p.id === id);
+
+const byName = n =>
+  products.find(p => p.name === n);
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+const $ = id =>
+  document.getElementById(id);
+
+
+const esc = v =>
+  String(v).replace(
+    /[&<>'"]/g,
+    c => ({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      "'":'&#39;',
+      '"':'&quot;'
+    }[c])
+  );
+
+
+const money = v =>
+  "₱" +
+  Number(v).toLocaleString(
+    "en-PH",
+    {
+      minimumFractionDigits:2,
+      maximumFractionDigits:2
+    }
+  );
+
+
+let toastT;
+
+
+function toast(m){
+
+  const t = $("toast");
+
+  t.textContent = m;
+
+  t.classList.add("show");
+
+  clearTimeout(toastT);
+
+  toastT = setTimeout(
+    () => t.classList.remove("show"),
+    2000
+  );
+
+}
+
+
+/* =========================================================
+   PRODUCT IMAGE SYSTEM
+========================================================= */
+
+const CK = "unimartImgCache2";
+
+let cache = {};
+
+try{
+
+  cache =
+    JSON.parse(
+      localStorage.getItem(CK) || "{}"
+    );
+
+}catch(e){
+
+  cache = {};
+
+}
+
+
+const saveCache = () => {
+
+  try{
+
+    localStorage.setItem(
+      CK,
+      JSON.stringify(cache)
+    );
+
+  }catch(e){}
+
+};
+
+
+const norm = t =>
+  String(t)
+    .toLowerCase()
+    .replace(/[^a-z0-9 ]/g,"");
+
+
+const clean = n =>
+  n
+  .replace(
+    /\b\d+(\.\d+)?\s*(g|kg|ml|l|pcs|pc|s)\b/ig,
+    ""
+  )
+  .replace(/[₱]\s*\d+/g,"")
+  .replace(/[-–&]/g," ")
+  .replace(/\s+/g," ")
+  .trim();
+
+
+async function lookup(name){
+
+  const q = clean(name);
+
+  const words =
+    norm(q)
+    .split(" ")
+    .filter(w => w.length > 2);
+
+  const need =
+    Math.min(2,words.length);
+
+  for(
+    const h of [
+      "openfoodfacts",
+      "openbeautyfacts",
+      "openproductsfacts"
+    ]
+  ){
+
+    try{
+
+      const r = await fetch(
+        `https://world.${h}.org/cgi/search.pl?search_terms=${encodeURIComponent(q)}&search_simple=1&action=process&json=1&page_size=8&fields=product_name,brands,image_front_url,image_front_small_url`
+      );
+
+      if(!r.ok) continue;
+
+      const d = await r.json();
+
+      const hit =
+        (d.products || []).find(
+          p =>
+            (
+              p.image_front_url ||
+              p.image_front_small_url
+            ) &&
+            words.filter(
+              w =>
+                norm(
+                  (p.brands || "") +
+                  " " +
+                  (p.product_name || "")
+                ).includes(w)
+            ).length >= need
+        );
+
+      if(hit){
+
+        return (
+          hit.image_front_url ||
+          hit.image_front_small_url
+        );
+
+      }
+
+    }catch(e){}
+
+  }
+
+  return "";
+
+}
+
+
+function imgBox(p){
+
+  return `
+
+    <div class="ph">
+      ${esc(p.name)}
+    </div>
+
+    <img
+      hidden
+      class="pimg"
+      alt="${esc(p.name)}"
+      data-q="${esc(p.name)}"
+      data-src="${esc(p.image)}"
+      referrerpolicy="no-referrer"
+      decoding="async"
+    >
+
+  `;
+
+}
+
+
+function setImg(img,url,fail){
+
+  img.onload = () => {
+
+    img.hidden = false;
+
+    const p =
+      img.previousElementSibling;
+
+    if(
+      p &&
+      p.classList.contains("ph")
+    ){
+
+      p.remove();
+
+    }
+
+  };
+
+  img.onerror = () => {
+
+    if(fail){
+
+      fail();
+
+    }else{
+
+      img.remove();
+
+    }
+
+  };
+
+  img.src = url;
+
+}
+
+
+const queue = [];
+
+let busy = false;
+
+
+async function pump(){
+
+  if(busy) return;
+
+  busy = true;
+
+  while(queue.length){
+
+    const img =
+      queue.shift();
+
+    if(!img.isConnected)
+      continue;
+
+    const n =
+      img.dataset.q;
+
+    let u =
+      cache[n];
+
+    if(u === undefined){
+
+      u =
+        await lookup(n);
+
+      cache[n] = u;
+
+      saveCache();
+
+      await new Promise(
+        r => setTimeout(r,1100)
+      );
+
+    }
+
+    if(u){
+
+      setImg(img,u);
+
+    }
+
+  }
+
+  busy = false;
+
+}
+
+
+function loadImg(img){
+
+  const q = () => {
+
+    queue.push(img);
+
+    pump();
+
+  };
+
+
+  if(img.dataset.src){
+
+    setImg(
+      img,
+      img.dataset.src,
+      q
+    );
+
+  }else{
+
+    q();
+
+  }
+
+}
+
+
+const io =
+new IntersectionObserver(
+  es =>
+    es.forEach(e => {
+
+      if(!e.isIntersecting)
+        return;
+
+      io.unobserve(e.target);
+
+      const i =
+        e.target.querySelector(".pimg");
+
+      if(i)
+        loadImg(i);
+
+    }),
+  {
+    rootMargin:"250px"
+  }
+);
+
+
+const hydrate = root =>
+
+  root
+  .querySelectorAll(".pimg")
+  .forEach(i =>
+    io.observe(i.parentElement)
+  );
+
+
+/* =========================================================
+   CART
+========================================================= */
+
+let cart = [];
+
+try{
+
+  cart =
+    JSON.parse(
+      localStorage.getItem(
+        "unimartCart"
+      ) || "[]"
+    );
+
+}catch(e){
+
+  cart = [];
+
+}
+
+
+function saveCart(){
+
+  try{
+
+    localStorage.setItem(
+      "unimartCart",
+      JSON.stringify(cart)
+    );
+
+  }catch(e){
+
+    toast(
+      "Could not save your cart"
+    );
+
+  }
+
+
+  const n =
+    cart.reduce(
+      (s,x) =>
+        s + (Number(x.qty) || 1),
+      0
+    );
+
+  const b =
+    $("badge");
+
+  b.textContent = n;
+
+  b.style.display =
+    n ? "flex" : "none";
+
+}
+
+
+function addToCart(id){
+
+  const p =
+    byId(id);
+
+  if(!p) return;
+
+  const stock =
+    Number(p.stock) || 0;
+
+  if(stock <= 0){
+
+    toast(
+      p.name +
+      " is out of stock."
+    );
+
+    return;
+
+  }
+
+
+  const f =
+    cart.find(
+      x => x.name === p.name
+    );
+
+
+  if(f){
+
+    if(
+      (Number(f.qty) || 1)
+      >= stock
+    ){
+
+      toast(
+        "Only " +
+        stock +
+        " available for " +
+        p.name +
+        "."
+      );
+
+      return;
+
+    }
+
+    f.qty =
+      (Number(f.qty) || 1) + 1;
+
+  }else{
+
+    cart.push({
+
+      name:p.name,
+      price:p.price,
+      image:p.image,
+      qty:1
+
+    });
+
+  }
+
+
+  saveCart();
+
+  renderCart();
+
+  toast(
+    p.name +
+    " added to cart."
+  );
+
+}
+
+
+function cartTotal(){
+
+  return cart.reduce(
+    (sum,x) => {
+
+      const p =
+        byName(x.name);
+
+      return p
+        ? sum +
+          p.price *
+          Number(x.qty || 1)
+        : sum;
+
+    },
+    0
+  );
+
+}
+
+
+function cartCount(){
+
+  return cart.reduce(
+    (sum,x) =>
+      sum + Number(x.qty || 1),
+    0
+  );
+
+}
+
+
+function renderCart(){
+
+  const box =
+    $("cartBox");
+
+  const rows =
+    cart
+    .map(x => ({
+      x,
+      p:byName(x.name)
+    }))
+    .filter(r => r.p);
+
+
+  if(!rows.length){
+
+    box.innerHTML = `
+
+      <div class="empty">
+
+        <div class="e">🛒</div>
+
+        <h3>
+          Your cart is empty
+        </h3>
+
+        <p>
+          Add some products and they
+          will appear here.
+        </p>
+
+        <button
+          class="btn"
+          data-view="home"
+        >
+          Start Shopping
+        </button>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  let sub = 0;
+
+  let count = 0;
+
+
+  const items =
+    rows
+    .map(({x,p}) => {
+
+      sub +=
+        p.price *
+        Number(x.qty);
+
+      count +=
+        Number(x.qty);
+
+      return `
+
+        <div class="item">
+
+          <div class="thumb">
+            ${imgBox(p)}
+          </div>
+
+          <div class="in">
+
+            <div class="n">
+              ${esc(p.name)}
+            </div>
+
+            <div class="p">
+              ${money(p.price)}
+            </div>
+
+            <div class="qr">
+
+              <div class="qc">
+
+                <button
+                  class="qb"
+                  data-qty="-1"
+                  data-id="${p.id}"
+                >
+                  −
+                </button>
+
+                <span class="qn">
+                  ${x.qty}
+                </span>
+
+                <button
+                  class="qb"
+                  data-qty="1"
+                  data-id="${p.id}"
+                >
+                  +
+                </button>
+
+              </div>
+
+              <button
+                class="rm"
+                data-rm="${p.id}"
+              >
+                Remove
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      `;
+
+    })
+    .join("");
+
+
+  box.innerHTML =
+    items +
+
+    `
+
+    <div class="sum">
+
+      <div class="sr">
+        <span>Items</span>
+        <span>${count}</span>
+      </div>
+
+      <div class="sr">
+        <span>Subtotal</span>
+        <span>${money(sub)}</span>
+      </div>
+
+      <div class="sr">
+        <span>Delivery</span>
+        <span>FREE</span>
+      </div>
+
+      <div class="st">
+        <span>Total</span>
+        <span>${money(sub)}</span>
+      </div>
+
+      <button
+        class="btn"
+        id="checkout"
+      >
+        Proceed to Checkout
+      </button>
+
+    </div>
+
+    `;
+
+
+  hydrate(box);
+
+}
+
+
+/* =========================================================
+   PRODUCTS
+========================================================= */
+
+const S = {
+
+  cat:"All",
+  sub:"all",
+  q:""
+
+};
+
+
+function card(p){
+
+  const stock =
+    Number(p.stock) || 0;
+
+  const soldOut =
+    stock <= 0;
+
+
+  return `
+
+    <article
+      class="card"
+      data-open="${p.id}"
+    >
+
+      <div class="imgw">
+
+        <span class="tag">
+          ${esc(p.cat)}
+        </span>
+
+        ${imgBox(p)}
+
+      </div>
+
+
+      <div class="info">
+
+        <div class="pname">
+          ${esc(p.name)}
+        </div>
+
+        <div class="price">
+          ${money(p.price)}
+        </div>
+
+        <div
+          style="
+            margin-top:5px;
+            font-size:10px;
+            color:${soldOut ? "#d44" : "#777"};
+            font-weight:700
+          "
+        >
+          Stock: ${stock}
+        </div>
+
+
+        <div class="pbot">
+
+          <small>
+            ${esc(p.type)}
+          </small>
+
+          <button
+            class="add"
+            data-add="${p.id}"
+            aria-label="Add to cart"
+            ${soldOut ? "disabled" : ""}
+          >
+            ${soldOut ? "×" : "+"}
+          </button>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  `;
+
+}
+
+
+function fill(el,list,msg){
+
+  el.innerHTML =
+    list.length
+    ? list.map(card).join("")
+    : `<div class="none">${msg || "No products found."}</div>`;
+
+  hydrate(el);
+
+}
+
+
+function renderProducts(){
+
+  const q =
+    S.q.trim().toLowerCase();
+
+
+  let list =
+    products.filter(p => {
+
+      const categoryMatch =
+        S.cat === "All" ||
+        p.cat === S.cat;
+
+
+      const subMatch =
+        S.cat === "Snacks" &&
+        S.sub !== "all"
+        ? p.sub === S.sub
+        : true;
+
+
+      const searchMatch =
+        !q ||
+        (
+          p.name +
+          " " +
+          p.cat +
+          " " +
+          p.type
+        )
+        .toLowerCase()
+        .includes(q);
+
+
+      return (
+        categoryMatch &&
+        subMatch &&
+        searchMatch
+      );
+
+    });
+
+
+  $("ptitle").textContent =
+    q
+    ? "Search Results"
+    :
+      (
+        S.cat === "All"
+        ? "All Products"
+        : S.cat
+      );
+
+
+  $("psub").textContent =
+    q
+    ? `${list.length} product(s) found`
+    :
+      (
+        S.cat === "All"
+        ? "All available products"
+        : "Products in " + S.cat
+      );
+
+
+  const tabs =
+    $("tabs");
+
+
+  if(
+    S.cat === "Snacks" &&
+    !q
+  ){
+
+    tabs.style.display =
+      "flex";
+
+    tabs.innerHTML =
+      [
+        ["all","All"],
+        ["chips","Chips"],
+        ["cookies","Cookies"],
+        ["biscuits","Biscuits"]
+      ]
+      .map(t => `
+
+        <button
+          class="tab ${S.sub === t[0] ? "on" : ""}"
+          data-sub="${t[0]}"
+        >
+          ${t[1]}
+        </button>
+
+      `)
+      .join("");
+
+  }else{
+
+    tabs.style.display =
+      "none";
+
+  }
+
+
+  fill(
+    $("plist"),
+    list,
+    "No products available in this category yet."
+  );
+
+}
+
+
+function openCategory(c){
+
+  S.cat = c;
+
+  S.sub = "all";
+
+  S.q = "";
+
+  $("q").value = "";
+
+  renderProducts();
+
+  view("products");
+
+
+  document
+    .querySelectorAll(".chip")
+    .forEach(
+      b =>
+        b.classList.toggle(
+          "on",
+          b.dataset.cat === c
+        )
+    );
+
+}
+
+
+/* =========================================================
+   HOME
+========================================================= */
+
+function renderHome(){
+
+  $("chips").innerHTML =
+    [
+      "All",
+      ...CATS
+    ]
+    .map(c => `
+
+      <button
+        class="chip ${c === "All" ? "on" : ""}"
+        data-cat="${esc(c)}"
+      >
+
+        <i>
+          ${c === "All" ? "▦" : ICON[c]}
+        </i>
+
+        <span>
+          ${esc(c)}
+        </span>
+
+      </button>
+
+    `)
+    .join("");
+
+
+  const seen = {};
+
+
+  fill(
+    $("featured"),
+    products.filter(
+      p =>
+        (
+          seen[p.cat] =
+          (seen[p.cat] || 0) + 1
+        ) <= 2
+    )
+  );
+
+
+  $("catGrid").innerHTML =
+    CATS
+    .map(c => {
+
+      const p =
+        products.find(
+          x => x.cat === c
+        );
+
+      return `
+
+        <button
+          class="cat"
+          data-cat="${esc(c)}"
+        >
+
+          <div class="imgw">
+            ${imgBox(p)}
+          </div>
+
+          <b>
+            ${esc(c)}
+          </b>
+
+          <small>
+            View Products →
+          </small>
+
+        </button>
+
+      `;
+
+    })
+    .join("");
+
+
+  hydrate(
+    $("catGrid")
+  );
+
+}
+
+
+/* =========================================================
+   VIEWS
+========================================================= */
+
+function view(v){
+
+  document
+    .querySelectorAll(".view")
+    .forEach(
+      s =>
+        s.classList.toggle(
+          "active",
+          s.id === v
+        )
+    );
+
+
+  document
+    .querySelectorAll(".nav button")
+    .forEach(
+      b =>
+        b.classList.toggle(
+          "on",
+          b.dataset.view === v ||
+          (
+            v === "products" &&
+            b.dataset.view === "categories"
+          )
+        )
+    );
+
+
+  if(v === "cart")
+    renderCart();
+
+
+  if(v === "profile")
+    loadProfile();
+
+
+  window.scrollTo(0,0);
+
+}
+
+
+/* =========================================================
+   USER PROFILE
+========================================================= */
+
+function getUser(){
+
+  try{
+
+    return JSON.parse(
+      localStorage.getItem(
+        "unimartUser"
+      ) || "null"
+    );
+
+  }catch(e){
+
+    return null;
+
+  }
+
+}
+
+
+function loadProfile(){
+
+  const u =
+    getUser();
+
+
+  const name =
+    u?.fullName ||
+    u?.name ||
+    u?.fullname ||
+    u?.displayName ||
+    "UniMart User";
+
+
+  const email =
+    u?.email ||
+    u?.emailAddress ||
+    "Not available";
+
+
+  const phone =
+    u?.phone ||
+    u?.phoneNumber ||
+    u?.mobile ||
+    u?.mobileNumber ||
+    "Not available";
+
+
+  $("pn").textContent =
+    name;
+
+  $("pe").textContent =
+    email === "Not available"
+    ? "Welcome to UniMart"
+    : email;
+
+
+  $("av").textContent =
+    name
+    .charAt(0)
+    .toUpperCase();
+
+
+  $("profileName").textContent =
+    name;
+
+  $("profileEmail").textContent =
+    email;
+
+  $("profilePhone").textContent =
+    phone;
+
+
+  $("hello").textContent =
+    u
+    ? "Hello, " + name + "!"
+    : "Hello, Shopper!";
+
+
+  renderHistory();
+
+}
+
+
+/* =========================================================
+   PRODUCT MODAL
+========================================================= */
+
+function openProduct(id){
+
+  const p =
+    byId(id);
+
+  if(!p) return;
+
+
+  $("mt").textContent =
+    p.name;
+
+
+  $("mc").innerHTML = `
+
+    <div class="imgw mimg">
+      ${imgBox(p)}
+    </div>
+
+    <div
+      class="price"
+      style="
+        font-size:23px;
+        margin-top:14px
+      "
+    >
+      ${money(p.price)}
+    </div>
+
+    <p
+      style="
+        color:#777;
+        font-size:12px;
+        margin-top:5px
+      "
+    >
+      Category:
+      ${esc(p.cat)}
+      ·
+      ${esc(p.type)}
+    </p>
+
+    <p
+      style="
+        color:${p.stock > 0 ? "#006b4f" : "#d44"};
+        font-size:13px;
+        font-weight:800;
+        margin-top:8px
+      "
+    >
+      Stock: ${p.stock}
+    </p>
+
+    <button
+      class="btn"
+      data-add="${p.id}"
+      data-close="1"
+      ${p.stock <= 0 ? "disabled" : ""}
+    >
+      ${
+        p.stock > 0
+        ? "Add to Cart"
+        : "Out of Stock"
+      }
+    </button>
+
+  `;
+
+
+  hydrate(
+    $("mc")
+  );
+
+
+  $("mbg")
+    .classList
+    .add("show");
+
+}
+
+
+function closeModal(){
+
+  $("mbg")
+    .classList
+    .remove("show");
+
+}
+
+
+/* =========================================================
+   CHECKOUT
+========================================================= */
+
+function openCheckout(){
+
+  if(!cart.length){
+
+    toast(
+      "Your cart is empty."
+    );
+
+    return;
+
+  }
+
+
+  const total =
+    cartTotal();
+
+  const count =
+    cartCount();
+
+
+  const productsHTML =
+    cart
+    .map(x => {
+
+      const p =
+        byName(x.name);
+
+      if(!p) return "";
+
+      const qty =
+        Number(x.qty) || 1;
+
+      const line =
+        p.price * qty;
+
+      return `
+
+        <div class="checkout-product">
+
+          <div class="checkout-product-name">
+            ${esc(p.name)}
+            × ${qty}
+          </div>
+
+          <div class="checkout-product-price">
+            ${money(line)}
+          </div>
+
+        </div>
+
+      `;
+
+    })
+    .join("");
+
+
+  $("checkoutContent").innerHTML = `
+
+    <div class="checkout-summary">
+
+      <div class="checkout-row">
+        <span>Total Items</span>
+        <strong>${count}</strong>
+      </div>
+
+      <div class="checkout-row">
+        <span>Subtotal</span>
+        <strong>${money(total)}</strong>
+      </div>
+
+      <div class="checkout-row">
+        <span>Delivery</span>
+        <strong>FREE</strong>
+      </div>
+
+      <div class="checkout-row total">
+        <span>Total</span>
+        <span>${money(total)}</span>
+      </div>
+
+    </div>
+
+
+    <h4
+      style="
+        font-size:14px;
+        margin-bottom:7px
+      "
+    >
+      Order Summary
+    </h4>
+
+
+    <div class="checkout-products">
+      ${productsHTML}
+    </div>
+
+
+    <label class="form-label">
+      Payment Method
+    </label>
+
+    <select
+      id="paymentMethod"
+      class="form-control"
+    >
+
+      <option value="Cash">
+        Cash
+      </option>
+
+      <option value="GCash">
+        GCash
+      </option>
+
+    </select>
+
+
+    <label class="form-label">
+      Amount Paid
+    </label>
+
+    <input
+      id="amountPaid"
+      class="form-control"
+      type="number"
+      min="${total}"
+      step="0.01"
+      placeholder="Enter amount paid"
+    >
+
+
+    <div class="payment-note">
+      For GCash, enter the exact amount or the amount paid.
+      For Cash, the system will automatically calculate your change.
+    </div>
+
+
+    <div
+      id="changePreview"
+      style="
+        display:none;
+        background:#e8f6f0;
+        color:#006b4f;
+        border-radius:10px;
+        padding:10px;
+        margin-top:10px;
+        font-size:12px;
+        font-weight:800;
+        text-align:center
+      "
+    ></div>
+
+
+    <button
+      class="btn"
+      id="confirmPayment"
+    >
+      Confirm Payment
+    </button>
+
+  `;
+
+
+  $("checkoutBg")
+    .classList
+    .add("show");
+
+
+  const amount =
+    $("amountPaid");
+
+
+  amount.addEventListener(
+    "input",
+    updateChangePreview
+  );
+
+
+  $("paymentMethod")
+    .addEventListener(
+      "change",
+      updateChangePreview
+    );
+
+}
+
+
+function updateChangePreview(){
+
+  const amountEl =
+    $("amountPaid");
+
+  const preview =
+    $("changePreview");
+
+  if(!amountEl || !preview)
+    return;
+
+
+  const total =
+    cartTotal();
+
+  const paid =
+    Number(amountEl.value);
+
+
+  if(!paid){
+
+    preview.style.display =
+      "none";
+
+    return;
+
+  }
+
+
+  if(paid < total){
+
+    preview.style.display =
+      "block";
+
+    preview.style.background =
+      "#fff0f0";
+
+    preview.style.color =
+      "#c62828";
+
+    preview.textContent =
+      "Remaining amount: " +
+      money(total - paid);
+
+    return;
+
+  }
+
+
+  preview.style.display =
+    "block";
+
+  preview.style.background =
+    "#e8f6f0";
+
+  preview.style.color =
+    "#006b4f";
+
+  preview.textContent =
+    "Change: " +
+    money(paid - total);
+
+}
+
+
+function closeCheckout(){
+
+  $("checkoutBg")
+    .classList
+    .remove("show");
+
+}
+
+
+/* =========================================================
+   PURCHASE HISTORY
+========================================================= */
+
+const HISTORY_KEY =
+  "unimartPurchaseHistory";
+
+
+function getHistory(){
+
+  try{
+
+    const h =
+      JSON.parse(
+        localStorage.getItem(
+          HISTORY_KEY
+        ) || "[]"
+      );
+
+    return Array.isArray(h)
+      ? h
+      : [];
+
+  }catch(e){
+
+    return [];
+
+  }
+
+}
+
+
+function saveHistory(history){
+
+  try{
+
+    localStorage.setItem(
+      HISTORY_KEY,
+      JSON.stringify(history)
+    );
+
+  }catch(e){
+
+    toast(
+      "Could not save receipt history."
+    );
+
+  }
+
+}
+
+
+function generateReceiptNumber(){
+
+  const now =
+    new Date();
+
+  const stamp =
+    String(
+      now.getFullYear()
+    ).slice(-2) +
+
+    String(
+      now.getMonth() + 1
+    ).padStart(2,"0") +
+
+    String(
+      now.getDate()
+    ).padStart(2,"0") +
+
+    String(
+      now.getHours()
+    ).padStart(2,"0") +
+
+    String(
+      now.getMinutes()
+    ).padStart(2,"0") +
+
+    String(
+      now.getSeconds()
+    ).padStart(2,"0");
+
+
+  const random =
+    Math.floor(
+      100 +
+      Math.random() * 900
+    );
+
+
+  return "UM-" +
+    stamp +
+    "-" +
+    random;
+
+}
+
+
+function formatDate(date){
+
+  return new Date(date)
+    .toLocaleString(
+      "en-PH",
+      {
+        dateStyle:"medium",
+        timeStyle:"short"
+      }
+    );
+
+}
+
+
+function createReceipt(){
+
+  if(!cart.length){
+
+    toast(
+      "Your cart is empty."
+    );
+
+    return;
+
+  }
+
+
+  const total =
+    cartTotal();
+
+  const paid =
+    Number(
+      $("amountPaid")?.value
+    );
+
+
+  if(!Number.isFinite(paid)){
+
+    toast(
+      "Please enter the amount paid."
+    );
+
+    $("amountPaid")?.focus();
+
+    return;
+
+  }
+
+
+  if(paid < total){
+
+    toast(
+      "Amount paid is not enough."
+    );
+
+    $("amountPaid")?.focus();
+
+    return;
+
+  }
+
+
+  const method =
+    $("paymentMethod")
+    ?.value || "Cash";
+
+
+  const user =
+    getUser();
+
+
+  const customer =
+    user?.fullName ||
+    user?.name ||
+    user?.fullname ||
+    user?.displayName ||
+    "UniMart Customer";
+
+
+  const receipt = {
+
+    id:generateReceiptNumber(),
+
+    date:new Date().toISOString(),
+
+    customer:customer,
+
+    paymentMethod:method,
+
+    items:cart.map(x => {
+
+      const p =
+        byName(x.name);
+
+      return {
+
+        name:x.name,
+
+        price:
+          p
+          ? p.price
+          : Number(x.price || 0),
+
+        qty:
+          Number(x.qty || 1),
+
+        image:
+          p
+          ? p.image
+          : x.image
+
+      };
+
+    }),
+
+    subtotal:total,
+
+    delivery:0,
+
+    total:total,
+
+    amountPaid:paid,
+
+    change:
+      paid - total
+
+  };
+
+
+  const history =
+    getHistory();
+
+
+  history.unshift(
+    receipt
+  );
+
+
+  saveHistory(history);
+
+
+  /* CLEAR CART AFTER PAYMENT */
+
+  cart = [];
+
+  saveCart();
+
+  renderCart();
+
+
+  closeCheckout();
+
+
+  renderHistory();
+
+
+  showReceipt(
+    receipt
+  );
+
+
+  toast(
+    "Payment successful!"
+  );
+
+}
+
+
+/* =========================================================
+   RECEIPT DISPLAY
+========================================================= */
+
+function receiptHTML(receipt){
+
+  const itemRows =
+    receipt.items
+    .map(item => {
+
+      const line =
+        Number(item.price) *
+        Number(item.qty);
+
+
+      return `
+
+        <div class="receipt-line">
+
+          <span>
+            ${esc(item.name)}
+            × ${item.qty}
+          </span>
+
+          <span>
+            ${money(line)}
+          </span>
+
+        </div>
+
+      `;
+
+    })
+    .join("");
+
+
+  return `
+
+    <div class="receipt">
+
+      <div class="receipt-header">
+
+        <h2>
+          UniMart
+        </h2>
+
+        <p>
+          Official Purchase Receipt
+        </p>
+
+      </div>
+
+
+      <div class="receipt-meta">
+
+        <div>
+          <strong>Receipt No:</strong>
+          ${esc(receipt.id)}
+        </div>
+
+        <div>
+          <strong>Date:</strong>
+          ${esc(formatDate(receipt.date))}
+        </div>
+
+        <div>
+          <strong>Customer:</strong>
+          ${esc(receipt.customer)}
+        </div>
+
+        <div>
+          <strong>Payment:</strong>
+          ${esc(receipt.paymentMethod)}
+        </div>
+
+      </div>
+
+
+      <div>
+
+        ${itemRows}
+
+      </div>
+
+
+      <div class="receipt-totals">
+
+        <div class="receipt-total-row">
+
+          <span>
+            Subtotal
+          </span>
+
+          <span>
+            ${money(receipt.subtotal)}
+          </span>
+
+        </div>
+
+
+        <div class="receipt-total-row">
+
+          <span>
+            Delivery
+          </span>
+
+          <span>
+            FREE
+          </span>
+
+        </div>
+
+
+        <div class="receipt-total-row grand">
+
+          <span>
+            TOTAL
+          </span>
+
+          <span>
+            ${money(receipt.total)}
+          </span>
+
+        </div>
+
+
+        <div class="receipt-total-row">
+
+          <span>
+            Amount Paid
+          </span>
+
+          <span>
+            ${money(receipt.amountPaid)}
+          </span>
+
+        </div>
+
+
+        <div
+          class="receipt-total-row"
+          style="
+            color:#006b4f;
+            font-weight:800
+          "
+        >
+
+          <span>
+            Change
+          </span>
+
+          <span>
+            ${money(receipt.change)}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="receipt-footer">
+
+        Thank you for shopping at UniMart!<br>
+        Please keep this receipt for your records.
+
+      </div>
+
+    </div>
+
+
+    <div class="receipt-actions">
+
+      <button
+        class="receipt-close"
+        id="closeReceiptButton"
+      >
+        Close
+      </button>
+
+      <button
+        class="receipt-print"
+        id="printCurrentReceipt"
+      >
+        🖨 Print Receipt
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+function showReceipt(receipt){
+
+  $("receiptContent").innerHTML =
+    receiptHTML(receipt);
+
+
+  $("receiptBg")
+    .classList
+    .add("show");
+
+
+  $("closeReceiptButton")
+    .addEventListener(
+      "click",
+      closeReceipt
+    );
+
+
+  $("printCurrentReceipt")
+    .addEventListener(
+      "click",
+      () => printReceipt(receipt)
+    );
+
+}
+
+
+function closeReceipt(){
+
+  $("receiptBg")
+    .classList
+    .remove("show");
+
+}
+
+
+/* =========================================================
+   PRINT RECEIPT
+========================================================= */
+
+function printReceipt(receipt){
+
+  const printWindow =
+    window.open(
+      "",
+      "_blank",
+      "width=450,height=700"
+    );
+
+
+  if(!printWindow){
+
+    toast(
+      "Please allow pop-ups to print the receipt."
+    );
+
+    return;
+
+  }
+
+
+  printWindow.document.write(`
+
+    <!DOCTYPE html>
+
+    <html>
+
+    <head>
+
+      <title>
+        ${esc(receipt.id)}
+      </title>
+
+      <style>
+
+        body{
+          font-family:Arial,sans-serif;
+          padding:20px;
+          color:#222;
+          max-width:420px;
+          margin:auto
+        }
+
+        .receipt{
+          border:1px dashed #999;
+          padding:18px
+        }
+
+        h2{
+          text-align:center;
+          color:#006b4f;
+          margin:0
+        }
+
+        .center{
+          text-align:center
+        }
+
+        .meta{
+          font-size:12px;
+          line-height:1.7;
+          margin:15px 0
+        }
+
+        .line{
+          display:flex;
+          justify-content:space-between;
+          gap:10px;
+          border-bottom:1px dotted #ccc;
+          padding:7px 0;
+          font-size:12px
+        }
+
+        .total{
+          border-top:1px dashed #888;
+          margin-top:10px;
+          padding-top:10px;
+          font-weight:bold
+        }
+
+        .grand{
+          font-size:17px;
+          color:#006b4f
+        }
+
+        .footer{
+          border-top:1px dashed #888;
+          margin-top:15px;
+          padding-top:12px;
+          text-align:center;
+          font-size:11px;
+          color:#777
+        }
+
+      </style>
+
+    </head>
+
+    <body>
+
+      <div class="receipt">
+
+        <div class="center">
+
+          <h2>
+            UniMart
+          </h2>
+
+          <p>
+            Official Purchase Receipt
+          </p>
+
+        </div>
+
+
+        <div class="meta">
+
+          <div>
+            <b>Receipt No:</b>
+            ${esc(receipt.id)}
+          </div>
+
+          <div>
+            <b>Date:</b>
+            ${esc(formatDate(receipt.date))}
+          </div>
+
+          <div>
+            <b>Customer:</b>
+            ${esc(receipt.customer)}
+          </div>
+
+          <div>
+            <b>Payment:</b>
+            ${esc(receipt.paymentMethod)}
+          </div>
+
+        </div>
+
+
+        ${receipt.items.map(item => `
+
+          <div class="line">
+
+            <span>
+              ${esc(item.name)}
+              × ${item.qty}
+            </span>
+
+            <span>
+              ${money(
+                Number(item.price) *
+                Number(item.qty)
+              )}
+            </span>
+
+          </div>
+
+        `).join("")}
+
+
+        <div class="total">
+
+          <div class="line">
+            <span>
+              Subtotal
+            </span>
+            <span>
+              ${money(receipt.subtotal)}
+            </span>
+          </div>
+
+          <div class="line">
+            <span>
+              Delivery
+            </span>
+            <span>
+              FREE
+            </span>
+          </div>
+
+          <div class="line grand">
+            <span>
+              TOTAL
+            </span>
+            <span>
+              ${money(receipt.total)}
+            </span>
+          </div>
+
+          <div class="line">
+            <span>
+              Amount Paid
+            </span>
+            <span>
+              ${money(receipt.amountPaid)}
+            </span>
+          </div>
+
+          <div class="line">
+            <span>
+              Change
+            </span>
+            <span>
+              ${money(receipt.change)}
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="footer">
+
+          Thank you for shopping at UniMart!<br>
+          Please keep this receipt for your records.
+
+        </div>
+
+      </div>
+
+
+      <script>
+
+        window.onload = function(){
+
+          window.print();
+
+        };
+
+      <\/script>
+
+    </body>
+
+    </html>
+
+  `);
+
+
+  printWindow.document.close();
+
+}
+
+
+/* =========================================================
+   PURCHASE HISTORY DISPLAY
+========================================================= */
+
+function renderHistory(){
+
+  const list =
+    $("historyList");
+
+  if(!list)
+    return;
+
+
+  const history =
+    getHistory();
+
+
+  $("historyCount").textContent =
+    history.length +
+    (
+      history.length === 1
+      ? " receipt"
+      : " receipts"
+    );
+
+
+  if(!history.length){
+
+    list.innerHTML = `
+
+      <div class="no-history">
+
+        <div
+          style="
+            font-size:32px;
+            margin-bottom:7px
+          "
+        >
+          🧾
+        </div>
+
+        <strong>
+          No purchase history yet
+        </strong>
+
+        <p
+          style="
+            margin-top:5px;
+            color:#999
+          "
+        >
+          Your receipts will automatically
+          appear here after checkout.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    history
+    .map((receipt,index) => {
+
+      const itemCount =
+        receipt.items.reduce(
+          (sum,item) =>
+            sum +
+            Number(item.qty || 0),
+          0
+        );
+
+
+      const preview =
+        receipt.items
+        .slice(0,3)
+        .map(
+          item =>
+            `${esc(item.name)} × ${item.qty}`
+        )
+        .join("<br>");
+
+
+      const more =
+        receipt.items.length > 3
+        ? `<br>+ ${receipt.items.length - 3} more item(s)`
+        : "";
+
+
+      return `
+
+        <div class="history-card">
+
+          <div class="history-top">
+
+            <div>
+
+              <div class="history-no">
+                🧾 ${esc(receipt.id)}
+              </div>
+
+              <div class="history-date">
+                ${esc(
+                  formatDate(receipt.date)
+                )}
+              </div>
+
+            </div>
+
+            <div class="history-total">
+              ${money(receipt.total)}
+            </div>
+
+          </div>
+
+
+          <div class="history-items">
+
+            ${preview}
+
+            ${more}
+
+            <div
+              style="
+                margin-top:5px;
+                color:#888
+              "
+            >
+              ${itemCount} item(s)
+              · ${esc(receipt.paymentMethod)}
+            </div>
+
+          </div>
+
+
+          <div class="history-actions">
+
+            <button
+              class="view-receipt"
+              data-history-view="${index}"
+            >
+              🧾 View Receipt
+            </button>
+
+            <button
+              class="print-receipt"
+              data-history-print="${index}"
+            >
+              🖨 Print
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    })
+    .join("");
+
+}
+
+
+/* =========================================================
+   SETTINGS INFORMATION
+========================================================= */
+
+function openInfo(type){
+
+  const bg =
+    $("infoBg");
+
+  const title =
+    $("infoTitle");
+
+  const content =
+    $("infoContent");
+
+
+  if(
+    !bg ||
+    !title ||
+    !content
+  )
+    return;
+
+
+  if(type === "app"){
+
+    title.textContent =
+      "About App";
+
+
+    content.innerHTML = `
+
+      <div class="info-center">
+
+        <div class="info-icon">
+          🛒
+        </div>
+
+        <h3 class="info-title">
+          UniMart
+        </h3>
+
+        <p class="info-content-p">
+          UniMart is a mobile-friendly shopping
+          application designed to make browsing
+          everyday products simple and convenient.
+        </p>
+
+        <p class="info-content-p">
+          Users can browse categories, search
+          products, view product information,
+          add products to the cart, complete
+          checkout, receive a purchase receipt,
+          and view their purchase history.
+        </p>
+
+        <p class="info-version">
+          UniMart App
+        </p>
+
+      </div>
+
+    `;
+
+  }else if(type === "store"){
+
+    title.textContent =
+      "About This Store";
+
+
+    content.innerHTML = `
+
+      <div class="info-center">
+
+        <div class="info-icon">
+          🏪
+        </div>
+
+        <h3 class="info-title">
+          UniMart Store
+        </h3>
+
+        <p class="info-content-p">
+          Welcome to UniMart Store.
+        </p>
+
+        <p class="info-content-p">
+          UniMart offers everyday essentials
+          such as food, drinks, snacks, personal
+          care products, household items, instant
+          food, load promos, and other goods.
+        </p>
+
+        <p class="info-content-p">
+          Our goal is to provide customers with
+          a simple, convenient, and user-friendly
+          shopping experience.
+        </p>
+
+      </div>
+
+    `;
+
+  }
+
+
+  bg.classList.add("show");
+
+}
+
+
+function closeInfo(){
+
+  $("infoBg")
+    .classList
+    .remove("show");
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+function openLogout(){
+
+  const bg =
+    $("logoutBg");
+
+  if(!bg)
+    return;
+
+  bg.classList.add("show");
+
+  bg.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+}
+
+
+function closeLogout(){
+
+  const bg =
+    $("logoutBg");
+
+  if(!bg)
+    return;
+
+  bg.classList.remove("show");
+
+  bg.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+}
+
+
+function doLogout(){
+
+  localStorage.removeItem(
+    "unimartUser"
+  );
+
+  localStorage.removeItem(
+    "unimartCurrentUser"
+  );
+
+  localStorage.removeItem(
+    "unimartLoggedIn"
+  );
+
+  localStorage.removeItem(
+    "currentUser"
+  );
+
+  closeLogout();
+
+  window.location.href =
+    "index.html";
+
+}
+
+
+/* =========================================================
+   EVENTS
+========================================================= */
+
+document.addEventListener(
+  "click",
+  e => {
+
+    const t =
+      e.target;
+
+    const g =
+      s => t.closest(s);
+
+    let el;
+
+
+    /* ADD TO CART */
+
+    if(
+      el = g("[data-add]")
+    ){
+
+      e.stopPropagation();
+
+      addToCart(
+        +el.dataset.add
+      );
+
+      if(
+        el.dataset.close
+      ){
+
+        closeModal();
+
+      }
+
+      return;
+
+    }
+
+
+    /* CART QUANTITY */
+
+    if(
+      el = g("[data-qty]")
+    ){
+
+      const p =
+        byId(
+          +el.dataset.id
+        );
+
+
+      const x =
+        p &&
+        cart.find(
+          c =>
+            c.name === p.name
+        );
+
+
+      if(x){
+
+        const next =
+          Number(x.qty) +
+          Number(el.dataset.qty);
+
+
+        if(next > p.stock){
+
+          toast(
+            "Only " +
+            p.stock +
+            " available for " +
+            p.name +
+            "."
+          );
+
+          return;
+
+        }
+
+
+        x.qty =
+          next;
+
+
+        if(x.qty <= 0){
+
+          cart =
+            cart.filter(
+              c => c !== x
+            );
+
+        }
+
+
+        saveCart();
+
+        renderCart();
+
+      }
+
+      return;
+
+    }
+
+
+    /* REMOVE */
+
+    if(
+      el = g("[data-rm]")
+    ){
+
+      const p =
+        byId(
+          +el.dataset.rm
+        );
+
+      if(!p)
+        return;
+
+
+      cart =
+        cart.filter(
+          c =>
+            c.name !== p.name
+        );
+
+
+      saveCart();
+
+      renderCart();
+
+
+      toast(
+        "Item removed from cart."
+      );
+
+      return;
+
+    }
+
+
+    /* SNACK FILTER */
+
+    if(
+      el = g("[data-sub]")
+    ){
+
+      S.sub =
+        el.dataset.sub;
+
+      renderProducts();
+
+      return;
+
+    }
+
+
+    /* CATEGORY */
+
+    if(
+      el = g("[data-cat]")
+    ){
+
+      openCategory(
+        el.dataset.cat
+      );
+
+      return;
+
+    }
+
+
+    /* BACK TO CATEGORIES */
+
+    if(
+      el = g("#backCategories")
+    ){
+
+      S.cat =
+        "All";
+
+      S.sub =
+        "all";
+
+      S.q =
+        "";
+
+      $("q").value =
+        "";
+
+
+      document
+        .querySelectorAll(".chip")
+        .forEach(
+          b =>
+            b.classList.remove(
+              "on"
+            )
+        );
+
+
+      view(
+        "categories"
+      );
+
+      return;
+
+    }
+
+
+    /* VIEW */
+
+    if(
+      el = g("[data-view]")
+    ){
+
+      view(
+        el.dataset.view
+      );
+
+      return;
+
+    }
+
+
+    /* OPEN PRODUCT */
+
+    if(
+      el = g("[data-open]")
+    ){
+
+      openProduct(
+        +el.dataset.open
+      );
+
+      return;
+
+    }
+
+
+    /* CHECKOUT */
+
+    if(
+      t.id === "checkout" ||
+      g("#checkout")
+    ){
+
+      openCheckout();
+
+      return;
+
+    }
+
+
+    /* VIEW HISTORY RECEIPT */
+
+    if(
+      el =
+        g("[data-history-view]")
+    ){
+
+      const index =
+        Number(
+          el.dataset.historyView
+        );
+
+
+      const history =
+        getHistory();
+
+
+      if(
+        history[index]
+      ){
+
+        showReceipt(
+          history[index]
+        );
+
+      }
+
+      return;
+
+    }
+
+
+    /* PRINT HISTORY RECEIPT */
+
+    if(
+      el =
+        g("[data-history-print]")
+    ){
+
+      const index =
+        Number(
+          el.dataset.historyPrint
+        );
+
+
+      const history =
+        getHistory();
+
+
+      if(
+        history[index]
+      ){
+
+        printReceipt(
+          history[index]
+        );
+
+      }
+
+      return;
+
+    }
+
+
+    /* TOAST */
+
+    if(
+      el = g("[data-toast]")
+    ){
+
+      toast(
+        el.dataset.toast
+      );
+
+      return;
+
+    }
+
+
+    /* CLEAR */
+
+    if(
+      g("#clear")
+    ){
+
+      if(!cart.length){
+
+        toast(
+          "Cart is already empty."
+        );
+
+        return;
+
+      }
+
+
+      if(
+        confirm(
+          "Are you sure you want to clear your cart?"
+        )
+      ){
+
+        cart = [];
+
+        saveCart();
+
+        renderCart();
+
+        toast(
+          "Cart cleared."
+        );
+
+      }
+
+      return;
+
+    }
+
+
+    /* ABOUT */
+
+    if(
+      el = g("[data-info]")
+    ){
+
+      openInfo(
+        el.dataset.info
+      );
+
+      return;
+
+    }
+
+
+    /* LOGOUT */
+
+    if(
+      g("#logout")
+    ){
+
+      openLogout();
+
+      return;
+
+    }
+
+
+    /* CLOSE INFO */
+
+    if(
+      g("#infoX") ||
+      t.id === "infoBg"
+    ){
+
+      closeInfo();
+
+      return;
+
+    }
+
+
+    /* CLOSE PRODUCT MODAL */
+
+    if(
+      g("#mx") ||
+      t.id === "mbg"
+    ){
+
+      closeModal();
+
+      return;
+
+    }
+
+  }
+
+);
+
+
+/* =========================================================
+   MODAL BUTTONS
+========================================================= */
+
+$("cancelLogout")
+.addEventListener(
+  "click",
+  closeLogout
+);
+
+
+$("confirmLogout")
+.addEventListener(
+  "click",
+  doLogout
+);
+
+
+$("logoutBg")
+.addEventListener(
+  "click",
+  e => {
+
+    if(
+      e.target.id ===
+      "logoutBg"
+    ){
+
+      closeLogout();
+
+    }
+
+  }
+);
+
+
+/* PRODUCT MODAL */
+
+$("mx")
+.addEventListener(
+  "click",
+  closeModal
+);
+
+
+$("mbg")
+.addEventListener(
+  "click",
+  e => {
+
+    if(
+      e.target.id ===
+      "mbg"
+    ){
+
+      closeModal();
+
+    }
+
+  }
+);
+
+
+/* CHECKOUT MODAL */
+
+$("checkoutX")
+.addEventListener(
+  "click",
+  closeCheckout
+);
+
+
+$("checkoutBg")
+.addEventListener(
+  "click",
+  e => {
+
+    if(
+      e.target.id ===
+      "checkoutBg"
+    ){
+
+      closeCheckout();
+
+    }
+
+  }
+);
+
+
+/* RECEIPT MODAL */
+
+$("receiptX")
+.addEventListener(
+  "click",
+  closeReceipt
+);
+
+
+$("receiptBg")
+.addEventListener(
+  "click",
+  e => {
+
+    if(
+      e.target.id ===
+      "receiptBg"
+    ){
+
+      closeReceipt();
+
+    }
+
+  }
+);
+
+
+/* CONFIRM PAYMENT */
+
+document.addEventListener(
+  "click",
+  e => {
+
+    if(
+      e.target.id ===
+      "confirmPayment"
+    ){
+
+      createReceipt();
+
+    }
+
+  }
+);
+
+
+/* INFO MODAL */
+
+$("infoX")
+.addEventListener(
+  "click",
+  closeInfo
+);
+
+
+/* ESCAPE */
+
+document.addEventListener(
+  "keydown",
+  e => {
+
+    if(
+      e.key === "Escape"
+    ){
+
+      closeLogout();
+      closeModal();
+      closeCheckout();
+      closeReceipt();
+      closeInfo();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+$("q").addEventListener(
+  "input",
+  e => {
+
+    S.q =
+      e.target.value;
+
+
+    if(
+      S.q.trim()
+    ){
+
+      const alreadyInProducts =
+        $("products")
+        .classList
+        .contains("active");
+
+
+      if(
+        !alreadyInProducts
+      ){
+
+        S.cat =
+          "All";
+
+        S.sub =
+          "all";
+
+      }
+
+
+      renderProducts();
+
+      view(
+        "products"
+      );
+
+    }else if(
+      $("products")
+      .classList
+      .contains("active")
+    ){
+
+      renderProducts();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+renderHome();
+
+renderCart();
+
+saveCart();
+
+loadProfile();
+
+renderHistory();
+
+</script>
+
+</body>
+</html>
